@@ -57,6 +57,7 @@ sleep 1
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y remove nginx
+apt-get -y autoremove
 
 echo
 sleep 1

@@ -50,6 +50,7 @@ echo
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y remove postgresql postgresql-contrib
+apt-get -y autoremove
 
 echo
 sleep 1

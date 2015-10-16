@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='PHP 5.6'
+SOFTNAME='MySQL'
 
 function pause(){
    read -p "$*"
@@ -30,10 +30,10 @@ echo -e "  \ \ / /| |_) \___ \    | |/ _ \ / _ \| | |/ / | __|"
 echo -e "   \ V / |  __/ ___) |   | | (_) | (_) | |   <| | |_ "
 echo -e "    \_/  |_|   |____/    |_|\___/ \___/|_|_|\_\_|\__|"
 echo
-echo -e $GREEN'Lykegenes '$SOFTNAME' Uninstaller Script'$ENDCOLOR
+echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
 
 echo
-read -p 'Type y/Y and press [ENTER] to continue with the uninstallation or any other key to exit: '
+read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
 RESP=${REPLY,,}
 
 if [ "$RESP" != "y" ]
@@ -48,16 +48,38 @@ fi
 
 echo
 
-echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y remove php5-cli php5-fpm php5-json php5-curl php5-mysql php5-pgsql php5-sqlite php5-mcrypt
-apt-get -y autoremove
+echo -e $YELLOW'--->Refreshing packages list...'$ENDCOLOR
+sudo apt-get update
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
+GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep ondrej-ubuntu-mysql)
+if [ "$GREPOUT" == "" ]; then
+    sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+else
+    echo $SOFTNAME" PPA repository already exists..."
+fi
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Refreshing packages list again..."$ENDCOLOR
+sudo apt-get update
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
+sudo apt-get -y install mysql-server
 
 echo
 sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-echo -e $SOFTNAME' Uninstalled.'
+psql -V
 echo
 
 pause 'Press [Enter] key to continue...'

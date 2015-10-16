@@ -146,7 +146,7 @@ sleep 1
 echo
 
 echo -e $YELLOW"--->Copying settings file and setting permissions..."$ENDCOLOR
-cp $SCRIPTPATH/transmission-initial-settings.json /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Initial settings move failed.'$ENDCOLOR ; exit 1; }
+cp $SCRIPTPATH/utilities/transmission-initial-settings.json /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Initial settings move failed.'$ENDCOLOR ; exit 1; }
 cd /home/$UNAME/.config/transmission
 sudo usermod -aG debian-transmission $UNAME  || { echo -e $RED'Adding debian-transmission group to user failed.'$ENDCOLOR ; exit 1; }
 sudo chown $UNAME:debian-transmission settings.json  || { echo -e $RED'Chown settings.json failed'$ENDCOLOR ; exit 1; }
@@ -240,7 +240,7 @@ if [[ $NGINX_IS_INSTALLED -ne 0 ]]; then
         fi
         echo
         echo -e $YELLOW'--->Configuring Nginx for HTTP downloads...'$ENDCOLOR
-        sudo cp -f $SCRIPT_PATH/transmission/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
+        sudo cp -f $SCRIPTPATH/transmission/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
         sudo ln -f -s /etc/nginx/sites-available/transmission-downloads /etc/nginx/sites-enabled/transmission-downloads #symlink
         sed -i 's|TRANSMISSION_USERNAME|'$UNAME'|g' /etc/nginx/sites-available/downloads # change root to completed folder
         sed -i 's|TRANSMISSION_SERVER_NAME|'$TRANS_SERVER'|g' /etc/nginx/sites-available/downloads # change server name to listen to
