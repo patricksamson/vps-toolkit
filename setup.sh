@@ -63,6 +63,7 @@ echo -e $YELLOW'99. '$ENDCOLOR'Exit'
 
 echo
 echo -n "What would you like to do? [00-99]: "
+read option
 case $option in
     0 | 00)
         echo
