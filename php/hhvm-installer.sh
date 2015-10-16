@@ -58,7 +58,7 @@ echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
 GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep hhvm)
 if [ "$GREPOUT" == "" ]; then
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-    sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu trusty main'
+    sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu vivid main'
 else
     echo $SOFTNAME" PPA repository already exists..."
 fi
