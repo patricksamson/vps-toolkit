@@ -14,8 +14,10 @@ SCRIPTPATH=$(pwd)
 SOFTNAME='Transmission Web UI'
 
 # Test if Nginx is installed
-nginx -v > /dev/null 2>&1
-NGINX_IS_INSTALLED=$?
+NGINX_IS_INSTALLED=0
+if which nginx > /dev/null 2>&1; then
+    NGINX_IS_INSTALLED=1
+fi
 
 function pause(){
      read -p "$*"
@@ -205,7 +207,7 @@ sudo update-rc.d transmission-daemon defaults
 echo
 sleep 1
 
-if [[ $NGINX_IS_INSTALLED -ne 0 ]]; then
+if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
     read -p 'You may create a Nginx Proxy for Transmission. Do you want to create a proxy? Type y/Y and press [ENTER]: '
     NGINX_PROXY=${REPLY,,}
     if [ "$NGINX_PROXY" = "y" ]; then
