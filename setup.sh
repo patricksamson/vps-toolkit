@@ -68,7 +68,9 @@ case $option in
     0 | 00)
         echo
         echo -e $YELLOW'--->Checking for updates...'$ENDCOLOR
-        git pull
+        git fetch origin master
+        git reset --hard FETCH_HEAD
+        git clean -df
         echo
         pause 'Press [Enter] to restart and continue...'
         cd $SCRIPTPATH
