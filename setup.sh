@@ -78,7 +78,7 @@ case $option in
     1 | 01)
         sudo ./optimize-server.sh
         ;;
-    1 | 02)
+    2 | 02)
         sudo ./utilities/base-tools-installer.sh
         ;;
     10)
@@ -124,7 +124,6 @@ case $option in
         echo
         sleep 2
         ;;
-
     *)
         echo -e $RED'Invalid Option'$ENDCOLOR
         ScriptLoc=$(readlink -f "$0")

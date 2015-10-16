@@ -98,6 +98,7 @@ sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
+hhvm -v
 echo
 
 pause 'Press [Enter] key to continue...'

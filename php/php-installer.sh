@@ -94,6 +94,7 @@ fi
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
+php -v
 echo
 
 pause 'Press [Enter] key to continue...'
