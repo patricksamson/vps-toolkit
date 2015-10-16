@@ -244,8 +244,8 @@ if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
         echo -e $YELLOW'--->Configuring Nginx for HTTP downloads...'$ENDCOLOR
         sudo cp -f $SCRIPTPATH/transmission/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
         sudo ln -f -s /etc/nginx/sites-available/transmission-downloads /etc/nginx/sites-enabled/transmission-downloads #symlink
-        sed -i 's|TRANSMISSION_USERNAME|'$UNAME'|g' /etc/nginx/sites-available/downloads # change root to completed folder
-        sed -i 's|TRANSMISSION_SERVER_NAME|'$TRANS_SERVER'|g' /etc/nginx/sites-available/downloads # change server name to listen to
+        sed -i 's|TRANSMISSION_USERNAME|'$UNAME'|g' /etc/nginx/sites-available/transmission-downloads # change root to completed folder
+        sed -i 's|TRANSMISSION_SERVER_NAME|'$TRANS_SERVER'|g' /etc/nginx/sites-available/transmission-downloads # change server name to listen to
         echo "${TUNAME}:$(openssl passwd -apr1 ${TPASS})\n" >> /etc/nginx/conf.d/transmission-downloads.htpasswd # append at end of file
     fi
 
