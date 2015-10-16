@@ -242,7 +242,7 @@ if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
         fi
         echo
         echo -e $YELLOW'--->Configuring Nginx for HTTP downloads...'$ENDCOLOR
-        sudo cp -f $SCRIPTPATH/transmission/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
+        sudo cp -f $SCRIPTPATH/utilities/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
         sudo ln -f -s /etc/nginx/sites-available/transmission-downloads /etc/nginx/sites-enabled/transmission-downloads #symlink
         sed -i 's|TRANSMISSION_USERNAME|'$UNAME'|g' /etc/nginx/sites-available/transmission-downloads # change root to completed folder
         sed -i 's|TRANSMISSION_SERVER_NAME|'$TRANS_SERVER'|g' /etc/nginx/sites-available/transmission-downloads # change server name to listen to
