@@ -14,10 +14,11 @@ SCRIPTPATH=$(pwd)
 SOFTNAME='Composer'
 
 # Test if Composer is installed
-COMPOSER_IS_INSTALLED=0
-if which composer > /dev/null 2>&1; then
-    COMPOSER_IS_INSTALLED=1
-fi
+COMPOSER_IS_INSTALLED=1
+hash composer 2>/dev/null || {
+    echo -e $RED'Composer is not installed.'$ENDCOLOR
+    COMPOSER_IS_INSTALLED=0
+}
 
 function pause(){
    read -p "$*"
