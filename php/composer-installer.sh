@@ -16,7 +16,6 @@ SOFTNAME='Composer'
 # Test if Composer is installed
 COMPOSER_IS_INSTALLED=1
 hash composer 2>/dev/null || {
-    echo -e $RED'Composer is not installed.'$ENDCOLOR
     COMPOSER_IS_INSTALLED=0
 }
 
@@ -57,7 +56,7 @@ echo
 sleep 1
 
 # True, if composer is not installed
-if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
+if [[ $COMPOSER_IS_INSTALLED -eq 1 ]]; then
     echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
     curl -sS https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
