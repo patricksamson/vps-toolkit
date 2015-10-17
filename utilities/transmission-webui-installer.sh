@@ -136,7 +136,7 @@ echo
 echo -e $YELLOW"--->Copying settings file..."$ENDCOLOR
 CONFIG_FILE="/etc/transmission-daemon/settings.json"
 sudo cp -a -f $CONFIG_FILE $CONFIG_FILE.default
-sudo cp -f $SCRIPT_PATH/utilities/transmission-initial-settings.json $CONFIG_FILE
+sudo cp -f $SCRIPTPATH/utilities/transmission-initial-settings.json $CONFIG_FILE
 
 sleep 1
 echo
