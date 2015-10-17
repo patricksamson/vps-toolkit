@@ -116,12 +116,6 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating download directories..."$ENDCOLOR
-if [ ! -d "/home/$UNAME/.config" ]; then
-        mkdir /home/$UNAME/.config
-fi
-if [ ! -d "/home/$UNAME/.config/transmission" ]; then
-        mkdir /home/$UNAME/.config/transmission
-fi
 if [ ! -d "/home/$UNAME/transmission" ]; then
         mkdir /home/$UNAME/transmission
 fi
@@ -133,40 +127,32 @@ if [ ! -d "/home/$UNAME/transmission/incomplete" ]; then
 fi
 
 echo -e 'Following directories created...'
-echo -e $CYAN'/home/'$UNAME'/.config/transmission'$ENDCOLOR ' - Transmission Settings'
 echo -e $CYAN'/home/'$UNAME'/transmission/completed'$ENDCOLOR ' - Completed Downloads'
 echo -e $CYAN'/home/'$UNAME'/transmission/incomplete'$ENDCOLOR ' - Incomplete Downloads'
 
 sleep 1
 echo
 
-echo -e $YELLOW"--->Making some configuration changes..."$ENDCOLOR
-sudo sed -i 's/USER=debian-transmission/USER='$UNAME'/g' /etc/init.d/transmission-daemon  || { echo -e $RED'Replacing daemon username in init failed.'$ENDCOLOR ; exit 1; }
-sudo sed -i 's|/var/lib/transmission-daemon/info|/home/'$UNAME'/.config/transmission|g' /etc/default/transmission-daemon  || { echo -e $RED'Replacing config directory in default failed.'$ENDCOLOR ; exit 1; }
+echo -e $YELLOW"--->Copying settings file..."$ENDCOLOR
+CONFIG_FILE="/etc/transmission-daemon/settings.json"
+sudo cp -a -f $CONFIG_FILE $CONFIG_FILE.default
+sudo cp -f $SCRIPT_PATH/utilities/transmission-initial-settings.json $CONFIG_FILE
 
 sleep 1
 echo
 
-echo -e $YELLOW"--->Copying settings file and setting permissions..."$ENDCOLOR
-cp $SCRIPTPATH/utilities/transmission-initial-settings.json /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Initial settings move failed.'$ENDCOLOR ; exit 1; }
-cd /home/$UNAME/.config/transmission
+echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
 sudo usermod -aG debian-transmission $UNAME  || { echo -e $RED'Adding debian-transmission group to user failed.'$ENDCOLOR ; exit 1; }
-sudo chown $UNAME:debian-transmission settings.json  || { echo -e $RED'Chown settings.json failed'$ENDCOLOR ; exit 1; }
-sudo rm /var/lib/transmission-daemon/info/settings.json > /dev/null 2>&1
-sudo ln -s /home/$UNAME/.config/transmission/settings.json /var/lib/transmission-daemon/info/settings.json || { echo -e $RED'Creating settings.json symbolic link failed.'$ENDCOLOR ; exit 1; }
-sudo chown -R $UNAME: /home/$UNAME/transmission
-sudo chown -R $UNAME:debian-transmission /home/$UNAME/.config/transmission
+sudo chown $UNAME:debian-transmission $CONFIG_FILE  || { echo -e $RED'Chown settings.json failed'$ENDCOLOR ; exit 1; }
+sudo chown -R $UNAME:debian-transmission /home/$UNAME/transmission
 sudo chmod -R 775 /home/$UNAME/transmission
-sudo chmod -R 775 /home/$UNAME/.config/transmission
-sudo chmod -R 775 /var/lib/transmission-daemon
-sudo chmod g+s /home/$UNAME/.config/transmission
 sudo chmod g+s /home/$UNAME/transmission
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Setting up Transmission User, WebUI User and Password..."$ENDCOLOR
-sed -i 's|USER_NAME|'$UNAME'|g' /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Replacing username in settings-json failed.'$ENDCOLOR ; exit 1; }
+sed -i 's|USER_NAME|'$UNAME'|g' $CONFIG_FILE || { echo -e $RED'Replacing username in settings-json failed.'$ENDCOLOR ; exit 1; }
 
 echo -n 'Set a username for Transmission WebUI and press [ENTER]: '
 read TUNAME
@@ -177,7 +163,7 @@ if [ -z "$TUNAME" ]
      else
      echo -e '    WebUI username set to:'$CYAN $TUNAME $ENDCOLOR
 fi
-sed -i 's|WEBUI_USERNAME|'$TUNAME'|g' /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Setting new username in settings.json failed.'$ENDCOLOR ; exit 1; }
+sed -i 's|WEBUI_USERNAME|'$TUNAME'|g' $CONFIG_FILE || { echo -e $RED'Setting new username in settings.json failed.'$ENDCOLOR ; exit 1; }
 
 echo -n 'Set a password for Transmission WebUI and press [ENTER]: '
 read TPASS
@@ -188,21 +174,8 @@ if [ -z "$TPASS" ]
      else
      echo -e '    WebUI password set to: '$CYAN$TPASS$ENDCOLOR
 fi
-sed -i 's|WEBUI_PASSWORD|'$TPASS'|g' /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Setting new password in settings.json failed.'$ENDCOLOR ; exit 1; }
-sed -i 's|USER_NAME|'$UNAME'|g' /home/$UNAME/.config/transmission/settings.json || { echo -e $RED'Replacing username in settings-json failed.'$ENDCOLOR ; exit 1; }
-
-echo
-sleep 1
-
-echo -e $YELLOW"--->Setting setuid and setgid..."$ENDCOLOR
-sudo sed -i 's/setuid debian-transmission/setuid '$UNAME'/g' /etc/init/transmission-daemon.conf  || { echo -e $RED'Replacing setuid failed.'$ENDCOLOR ; exit 1; }
-sudo sed -i 's/setgid debian-transmission/setgid '$UGROUP'/g' /etc/init/transmission-daemon.conf  || { echo -e $RED'Replacing setgid failed.'$ENDCOLOR ; exit 1; }
-
-echo
-sleep 1
-
-echo -e $YELLOW"--->Enabling autostart during boot..."$ENDCOLOR
-sudo update-rc.d transmission-daemon defaults
+sed -i 's|WEBUI_PASSWORD|'$TPASS'|g' $CONFIG_FILE || { echo -e $RED'Setting new password in settings.json failed.'$ENDCOLOR ; exit 1; }
+sed -i 's|USER_NAME|'$UNAME'|g' $CONFIG_FILE || { echo -e $RED'Replacing username in settings.json failed.'$ENDCOLOR ; exit 1; }
 
 echo
 sleep 1
@@ -246,7 +219,7 @@ if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
         sudo ln -f -s /etc/nginx/sites-available/transmission-downloads /etc/nginx/sites-enabled/transmission-downloads #symlink
         sed -i 's|TRANSMISSION_USERNAME|'$UNAME'|g' /etc/nginx/sites-available/transmission-downloads # change root to completed folder
         sed -i 's|TRANSMISSION_SERVER_NAME|'$TRANS_SERVER'|g' /etc/nginx/sites-available/transmission-downloads # change server name to listen to
-        echo "${TUNAME}:$(openssl passwd -apr1 ${TPASS})\n" >> /etc/nginx/conf.d/transmission-downloads.htpasswd # append at end of file
+        echo "${TUNAME}:$(openssl passwd -apr1 ${TPASS})" >> /etc/nginx/conf.d/transmission-downloads.htpasswd # append at end of file
     fi
 
     echo
@@ -257,8 +230,7 @@ if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
 fi
 
 echo -e $YELLOW"--->Starting Transmission..."$ENDCOLOR
-sudo /etc/init.d/transmission-daemon start >/dev/null 2>&1
-kill -s SIGHUP `pidof transmission-daemon` >/dev/null 2>&1
+sudo service transmission-daemon start
 
 echo
 sleep 1
