@@ -56,7 +56,7 @@ echo
 sleep 1
 
 # True, if composer is not installed
-if [[ $COMPOSER_IS_INSTALLED -eq 1 ]]; then
+if [[ $COMPOSER_IS_INSTALLED -eq 0 ]]; then
     echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
     curl -sS https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
