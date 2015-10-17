@@ -98,7 +98,7 @@ sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-hhvm -v
+hhvm --version
 echo
 
 pause 'Press [Enter] key to continue...'

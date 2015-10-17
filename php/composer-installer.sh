@@ -14,8 +14,10 @@ SCRIPTPATH=$(pwd)
 SOFTNAME='Composer'
 
 # Test if Composer is installed
-composer -v > /dev/null 2>&1
-COMPOSER_IS_INSTALLED=$?
+COMPOSER_IS_INSTALLED=0
+if which composer > /dev/null 2>&1; then
+    COMPOSER_IS_INSTALLED=1
+fi
 
 function pause(){
    read -p "$*"
