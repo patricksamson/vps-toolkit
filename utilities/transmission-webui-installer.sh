@@ -14,10 +14,10 @@ SCRIPTPATH=$(pwd)
 SOFTNAME='Transmission Web UI'
 
 # Test if Nginx is installed
-NGINX_IS_INSTALLED=0
-if which nginx > /dev/null 2>&1; then
-    NGINX_IS_INSTALLED=1
-fi
+NGINX_IS_INSTALLED=1
+hash nginx 2>/dev/null || {
+    NGINX_IS_INSTALLED=0
+}
 
 function pause(){
      read -p "$*"

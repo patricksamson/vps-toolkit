@@ -14,10 +14,10 @@ SCRIPTPATH=$(pwd)
 SOFTNAME='PHP 5.6'
 
 # Test if Nginx is installed
-NGINX_IS_INSTALLED=0
-if which nginx > /dev/null 2>&1; then
-    NGINX_IS_INSTALLED=1
-fi
+NGINX_IS_INSTALLED=1
+hash composer 2>/dev/null || {
+    NGINX_IS_INSTALLED=0
+}
 
 function pause(){
    read -p "$*"
