@@ -144,6 +144,7 @@ echo
 echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
 sudo usermod -aG debian-transmission $UNAME  || { echo -e $RED'Adding debian-transmission group to user failed.'$ENDCOLOR ; exit 1; }
 sudo chown $UNAME:debian-transmission $CONFIG_FILE  || { echo -e $RED'Chown settings.json failed'$ENDCOLOR ; exit 1; }
+sudo chmod 775 $CONFIG_FILE
 sudo chown -R $UNAME:debian-transmission /home/$UNAME/transmission
 sudo chmod -R 775 /home/$UNAME/transmission
 sudo chmod g+s /home/$UNAME/transmission
@@ -166,13 +167,15 @@ fi
 sed -i 's|WEBUI_USERNAME|'$TUNAME'|g' $CONFIG_FILE || { echo -e $RED'Setting new username in settings.json failed.'$ENDCOLOR ; exit 1; }
 
 echo -n 'Set a password for Transmission WebUI and press [ENTER]: '
+stty -echo #hide input
 read TPASS
+stty echo #show input
 if [ -z "$TPASS" ]
      then
      echo -e '    No password entered so setting default password: '$CYAN'transmission'$ENDCOLOR
      TPASS=transmission
      else
-     echo -e '    WebUI password set to: '$CYAN$TPASS$ENDCOLOR
+     echo -e '    WebUI password set successfully.'
 fi
 sed -i 's|WEBUI_PASSWORD|'$TPASS'|g' $CONFIG_FILE || { echo -e $RED'Setting new password in settings.json failed.'$ENDCOLOR ; exit 1; }
 sed -i 's|USER_NAME|'$UNAME'|g' $CONFIG_FILE || { echo -e $RED'Replacing username in settings.json failed.'$ENDCOLOR ; exit 1; }
@@ -231,6 +234,12 @@ fi
 
 echo -e $YELLOW"--->Starting Transmission..."$ENDCOLOR
 sudo service transmission-daemon start
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Updating Transmission Peers Blocklist..."$ENDCOLOR
+transmission-remote --auth $TUNAME:$TPASS --blocklist-update
 
 echo
 sleep 1

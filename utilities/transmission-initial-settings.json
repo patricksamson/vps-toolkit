@@ -12,7 +12,7 @@
     "blocklist-url": "http://john.bitsurge.net/public/biglist.p2p.gz",
     "cache-size-mb": 8,
     "dht-enabled": false,
-    "download-dir": "/home/USER_NAME/transmission/completed"
+    "download-dir": "/home/USER_NAME/transmission/completed",
     "download-limit": 9000,
     "download-limit-enabled": 1,
     "download-queue-enabled": true,
@@ -20,7 +20,7 @@
     "encryption": 1,
     "idle-seeding-limit": 360,
     "idle-seeding-limit-enabled": true,
-    "incomplete-dir": "/home/USER_NAME/transmission/incomplete"
+    "incomplete-dir": "/home/USER_NAME/transmission/incomplete",
     "incomplete-dir-enabled": true,
     "lpd-enabled": false,
     "max-peers-global": 200,
@@ -46,10 +46,10 @@
     "rpc-authentication-required": true,
     "rpc-bind-address": "0.0.0.0",
     "rpc-enabled": true,
-    "rpc-password": "WEBUI_PASSWORD"
+    "rpc-password": "WEBUI_PASSWORD",
     "rpc-port": 9091,
     "rpc-url": "/transmission/",
-    "rpc-username": "WEBUI_USERNAME"
+    "rpc-username": "WEBUI_USERNAME",
     "rpc-whitelist": "127.0.0.1",
     "rpc-whitelist-enabled": true,
     "scrape-paused-torrents-enabled": true,

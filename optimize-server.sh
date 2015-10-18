@@ -59,7 +59,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Setting server locales..."$ENDCOLOR
-sudo locale-gen en_CA.UTF-8
+sudo locale-gen en_CA en_CA.UTF-8 en_US en_US.UTF-8
 sudo dpkg-reconfigure locales
 
 echo
