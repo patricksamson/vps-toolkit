@@ -76,12 +76,17 @@ SSHKEY=${REPLY,,}
 if [ "$SSHKEY" = "y" ]; then
     echo -n 'Enter your email and press [ENTER]: '
     read EMAIL
-    su $UNAME
-    ssh-keygen -t rsa -b 4096 -C "$EMAIL"
+    #su $UNAME
+    #ssh-keygen -t rsa -b 4096 -C "$EMAIL"
+    sudo mkdir /home/$UNAME/.ssh
+    ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f /home/$UNAME/.shh/id_rsa
     eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa # Because of "su", we are in $UNAME's home directory
-    cat ~/.ssh/id_rsa.pub
-    exit #end su
+    #ssh-add ~/.ssh/id_rsa # Because of "su", we are in $UNAME's home directory
+    ssh-add /home/$UNAME/.ssh/id_rsa
+    #cat ~/.ssh/id_rsa.pub
+    cat /home/$UNAME/.ssh/id_rsa.pub
+    sudo chown -R $UNAME:$UNAME /home/$UNAME/.ssh
+    #exit #end su
 fi
 
 read -p 'Add User to Sudoers? Type y/Y and press [ENTER]: '
