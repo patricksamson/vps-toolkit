@@ -50,7 +50,7 @@ echo
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y remove php5-cli php5-fpm php5-json php5-curl php5-mysql php5-pgsql php5-sqlite php5-mcrypt
-apt-get -y autoremove
+sudo apt-get -y autoremove
 
 echo
 sleep 1

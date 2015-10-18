@@ -65,6 +65,12 @@ sudo dpkg-reconfigure locales
 echo
 sleep 1
 
+echo -e $YELLOW"--->Enabling passwordless sudo commands..."
+sudo echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/NOPASSWD
+
+echo
+sleep 1
+
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
 echo

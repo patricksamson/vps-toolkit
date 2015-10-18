@@ -57,7 +57,7 @@ sleep 1
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y remove hhvm
-apt-get -y autoremove
+sudo apt-get -y autoremove
 
 echo
 sleep 1

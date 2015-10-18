@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='MySQL'
+SOFTNAME='Transmission WebUI'
 
 function pause(){
    read -p "$*"
@@ -49,8 +49,31 @@ fi
 echo
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y remove mysql-server
+sudo apt-get -y remove transmission-daemon tranmission-cli transmission-common
 sudo apt-get -y autoremove
+
+echo
+sleep 1
+
+if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
+    read -p 'Do you want to delete the Nginx proxy? Type y/Y and press [ENTER]: '
+    NGINX_PROXY=${REPLY,,}
+    if [ "$NGINX_PROXY" = "y" ]; then
+        sudo rm /etc/nginx/sites-enabled/transmission-proxy
+        sudo rm /etc/nginx/sites-available/transmission-proxy
+        echo -e $CYAN'--->Nginx proxy deleted'$ENDCOLOR
+    fi
+
+    echo
+    sleep 1
+
+    read -p 'Do you want to delete the Nginx HTTP file browser? Type y/Y and press [ENTER]: '
+    NGINX_DOWNLOAD=${REPLY,,}
+    if [ "$NGINX_DOWNLOAD" = "y" ]; then
+        sudo rm /etc/nginx/sites-enabled/transmission-downlads
+        sudo rm /etc/nginx/sites-available/transmission-downlads
+        echo -e $CYAN'--->Nginx file browser deleted'$ENDCOLOR
+    fi
 
 echo
 sleep 1
