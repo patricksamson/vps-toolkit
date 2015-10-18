@@ -85,6 +85,9 @@ case $option in
     2 | 02)
         sudo ./utilities/base-tools-installer.sh
         ;;
+    3| 03)
+        sudo ./users/create-user.sh
+        ;;
     10)
         sudo ./webservers/nginx-installer.sh
         ;;
