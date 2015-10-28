@@ -81,23 +81,6 @@ sudo apt-get -y install python-software-properties
 echo
 sleep 1
 
-echo -e $YELLOW"--->Adding Transmission repository..."$ENDCOLOR
-GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep transmissionbt)
-if [ "$GREPOUT" == "" ]; then
-        sudo add-apt-repository -y ppa:transmissionbt/ppa
-else
-        echo "Transmission PPA repository already exists..."
-fi
-
-echo
-sleep 1
-
-echo -e $YELLOW"--->Refreshing packages list again..."$ENDCOLOR
-sudo apt-get update
-
-echo
-sleep 1
-
 echo -e $YELLOW"--->Installing Transmission commandline, and web interface..."$ENDCOLOR
 sudo apt-get -y install transmission-cli transmission-common transmission-daemon
 
