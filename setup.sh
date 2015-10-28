@@ -61,6 +61,7 @@ echo -e $YELLOW'34. '$ENDCOLOR'Composer - Install'
 echo -e $YELLOW'35. '$ENDCOLOR'Composer - Uninstall'
 echo -e $YELLOW'80. '$ENDCOLOR'Transmission Web UI - Install'
 echo -e $YELLOW'81. '$ENDCOLOR'Transmission Web UI - Uninstall'
+echo -e $YELLOW'82. '$ENDCOLOR'Invoice Ninja - Install'
 echo -e $YELLOW'99. '$ENDCOLOR'Exit'
 
 echo
@@ -129,6 +130,9 @@ case $option in
         ;;
     81)
         sudo ./utilities/transmission-webui-uninstaller.sh
+        ;;
+    82)
+        sudo ./apps/invoice-ninja-installer.sh
         ;;
     99)
         echo 'Exiting...'
