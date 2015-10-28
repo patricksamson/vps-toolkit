@@ -60,6 +60,16 @@ if [[ $COMPOSER_IS_INSTALLED -eq 0 ]]; then
     echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
     curl -sS https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
+
+    echo -n 'Set your API Token for GitHub.com and press [ENTER]: '
+    read TOKEN
+    if [ -z "$TOKEN" ]
+        then
+            echo -e $RED'No token entered! Composer will probably ask you for one. Resuming'$ENDCOLOR
+            echo
+        else
+            composer config --global github-oauth.github.com $TOKEN
+    fi
 else
     echo -e $YELLOW"--->Updating "$SOFTNAME"..."$ENDCOLOR
     composer self-update
