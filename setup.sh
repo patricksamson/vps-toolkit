@@ -77,7 +77,7 @@ case $option in
         echo
         pause 'Press [Enter] to restart and continue...'
         cd $SCRIPTPATH
-        sudo ./setup.sh
+        sudo bash ./setup.sh
         exit 0
         ;;
     1 | 01)

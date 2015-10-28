@@ -100,7 +100,7 @@ sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-composer -V
+# composer -V
 echo
 
 pause 'Press [Enter] key to continue...'
