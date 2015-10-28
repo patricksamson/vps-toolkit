@@ -57,7 +57,7 @@ sleep 1
 echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
 GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep nginx)
 if [ "$GREPOUT" == "" ]; then
-    sudo add-apt-repository -y ppa:nginx/stable
+    sudo add-apt-repository -y ppa:nginx/development
 else
     echo $SOFTNAME" PPA repository already exists..."
 fi
