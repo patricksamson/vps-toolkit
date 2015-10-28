@@ -71,6 +71,15 @@ sudo apt-get update
 echo
 sleep 1
 
+echo -e $YELLOW"--->Preparing for installation"$ENDCOLOR
+# sometimes mysql-server-5.6 failed to configure correctly
+sudo apt-get -y --reinstall install bsdutils
+sudo locale-gen en_US en_US.UTF-8
+sudo dpkg-reconfigure locales
+
+echo
+sleep 1
+
 echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y install mysql-server
 
