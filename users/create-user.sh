@@ -77,7 +77,7 @@ if [ "$SSHKEY" = "y" ]; then
     echo -n 'Enter your email and press [ENTER]: '
     read EMAIL
     sudo mkdir /home/$UNAME/.ssh
-    ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f /home/$UNAME/.shh/id_rsa
+    ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f /home/$UNAME/.ssh/id_rsa
     eval "$(ssh-agent -s)"
     ssh-add /home/$UNAME/.ssh/id_rsa
     cat /home/$UNAME/.ssh/id_rsa.pub
