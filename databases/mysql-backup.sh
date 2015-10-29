@@ -13,6 +13,8 @@ SCRIPTPATH=$(pwd)
 
 SOFTNAME='MySQL'
 
+OUTPUTDIR=/backups/mysql/
+
 function pause(){
    read -p "$*"
 }
@@ -70,17 +72,17 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating Beckup directory..."$ENDCOLOR
-mkdir -p /backups/mysql
-echo -e $CYAN"Backups will be placed in "$GREEN"/backups/mysql/"$ENDCOLOR
+mkdir -p $OUTPUTDIR
+echo -e $CYAN"Backups will be placed in $GREEN$OUTPUTDIR"$ENDCOLOR
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Backing up all MySQL databases..."$ENDCOLOR
-DATABASES=`mysql -u $UNAME -p $UPASS --batch --skip-column-names -e "SHOW DATABASES;" | grep -E -v "(information|performance)_schema"`
+DATABASES=`mysql -u $UNAME -p$UPASS --batch --skip-column-names -e "SHOW DATABASES;" | grep -E -v "(information|performance)_schema"`
 for DB in $DATABASES; do
     echo -e "Dumping database:$CYAN $DB"
-    sudo mysqldump -u $UNAME -p $UPASS --databases $DB | gzip > $DB-`date +%Y%m%d`.sql.gz
+    sudo mysqldump -u $UNAME -p$UPASS --databases $DB | gzip > $OUTPUTDIR$DB-`date +%Y%m%d`.sql.gz
 done
 
 echo
