@@ -65,8 +65,7 @@ if [[ $COMPOSER_IS_INSTALLED -eq 0 ]]; then
     read TOKEN
     if [ -z "$TOKEN" ]
         then
-            echo -e $RED'No token entered! Composer will probably ask you for one. Resuming'$ENDCOLOR
-            echo
+            echo -e $CYAN'No token entered! Composer will probably ask you for one. Resuming...'$ENDCOLOR
         else
             composer config --global github-oauth.github.com $TOKEN
     fi

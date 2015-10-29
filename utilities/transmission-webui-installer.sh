@@ -211,7 +211,7 @@ if [[ $NGINX_IS_INSTALLED -eq 1 ]]; then
     echo
     sleep 1
 
-    echo -e $YELLOW"--->Restarting nginx..."$ENDCOLOR
+    echo -e $YELLOW"--->Reloading Nginx..."$ENDCOLOR
     sudo service nginx reload
 fi
 
