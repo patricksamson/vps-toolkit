@@ -54,6 +54,7 @@ echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
 echo -e $YELLOW'21. '$ENDCOLOR'PostgreSQL - Uninstall'
 echo -e $YELLOW'22. '$ENDCOLOR'MySQL - Install'
 echo -e $YELLOW'23. '$ENDCOLOR'MySQL - Uninstall'
+echo -e $YELLOW'24. '$ENDCOLOR'MySQL - Backup'
 echo -e $YELLOW'30. '$ENDCOLOR'PHP - Install'
 echo -e $YELLOW'31. '$ENDCOLOR'PHP - Uninstall'
 echo -e $YELLOW'32. '$ENDCOLOR'HHVM - Install'
@@ -110,6 +111,9 @@ case $option in
         ;;
     23)
         sudo ./databases/mysql-uninstaller.sh
+        ;;
+    24)
+        sudo ./databases/mysql-backup.sh
         ;;
     30)
         sudo ./php/php-installer.sh
