@@ -35,6 +35,7 @@ echo
 echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
 
 echo
+echo -e $CYAN"If you're looking to restore a SQL dump, run this command : "$ENDCOLOR"zcat /path/to/file.sql.gz | mysql -u 'root' -p'password' your_database"
 read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
 RESP=${REPLY,,}
 
@@ -81,8 +82,8 @@ sleep 1
 echo -e $YELLOW"--->Backing up all MySQL databases..."$ENDCOLOR
 DATABASES=`mysql -u $UNAME -p$UPASS --batch --skip-column-names -e "SHOW DATABASES;" | grep -E -v "(information|performance)_schema"`
 for DB in $DATABASES; do
-    echo -e "Dumping database:$CYAN $DB"
-    sudo mysqldump -u $UNAME -p$UPASS --databases $DB | gzip > $OUTPUTDIR$DB-`date +%Y%m%d`.sql.gz
+    echo -e "Dumping database:$CYAN $DB"$ENDCOLOR
+    sudo mysqldump -u $UNAME -p$UPASS --databases $DB | gzip > $OUTPUTDIR$DB-`date +%Y%m%d%H%M%S`.sql.gz
 done
 
 echo
