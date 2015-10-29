@@ -11,9 +11,9 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='MySQL'
+SOFTNAME='PostgreSQL'
 
-OUTPUTDIR=/backups/mysql/
+OUTPUTDIR=/backups/pgsql/
 
 function pause(){
    read -p "$*"
@@ -35,8 +35,8 @@ echo
 echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
 
 echo
-echo -e $YELLOW"If you're looking to restore a SQL dump, run this command : "$ENDCOLOR
-echo -e $CYAN"zcat /path/to/file.sql.gz | mysql -u 'root' -p'password' your_database"$ENDCOLOR
+echo -e $YELLOW"If you're looking to restore a SQL dump, run this command (it will drop and recreate the database) : "$ENDCOLOR
+echo -e $CYAN"zcat /path/to/file.sql.gz | sudo -u postgres pg_restore -c -C -d your_database"$ENDCOLOR
 read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
 RESP=${REPLY,,}
 
@@ -81,10 +81,10 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Backing up all MySQL databases..."$ENDCOLOR
-DATABASES=`mysql -u $UNAME -p$UPASS --batch --skip-column-names -e "SHOW DATABASES;" | grep -E -v "(information|performance)_schema"`
+DATABASES=`sudo -u postgres psql -tqc "SELECT datname FROM pg_database WHERE datistemplate = false;"`
 for DB in $DATABASES; do
     echo -e "Dumping database:$CYAN $DB"$ENDCOLOR
-    sudo mysqldump -u $UNAME -p$UPASS --databases $DB | gzip > $OUTPUTDIR$DB-`date +%Y%m%d%H%M%S`.sql.gz
+    sudo -u postgres pg_dump -c -C -Fc -Z5 $DB  > $OUTPUTDIR$DB-`date +%Y%m%d%H%M%S`.sql.gz
 done
 
 echo
