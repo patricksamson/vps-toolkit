@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    server_name NINJA_SERVER_NAME;
+
+    root /var/www/invoice-ninja/public;
+    index index.html index.htm index.php;
+
+    include hhvm.conf;  # Include HHVM's configuration file for Nginx
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+
+
+

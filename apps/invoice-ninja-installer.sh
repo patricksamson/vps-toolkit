@@ -79,28 +79,51 @@ composer install -d /var/www/invoice-ninja
 echo
 sleep 1
 
+echo -e $YELLOW"--->Copying configuration files..."$ENDCOLOR
+sudo cp /var/www/invoice-ninja/.env.example /var/www/invoice-ninja/.env
+sudo cp ./apps/invoice-ninja-nginx /etc/nginx/sites-enabled/ninja
+
+echo
+sleep 1
+
 echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
 sudo chown -R $UNAME:www-data /var/www/invoice-ninja
+sudo chmod -R 775 /var/www/invoice-ninja
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Creating Database..."$ENDCOLOR
 # create the database if it does exist
-sudo mysql -e "create database IF NOT EXISTS ninja;"
+mysql -p -e "create database IF NOT EXISTS ninja;"
+mysql -p -e "CREATE SCHEMA ninja DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
 echo -e 'Database '$CYAN'ninja'$ENDCOLOR ' was configured'
 
 echo -e $YELLOW"--->Granting permissions to Database..."$ENDCOLOR
 # create the user if it doesn't exist, and grant permissions
-sudo mysql -e "GRANT ALL ON ninja.* To 'ninja'@'localhost' IDENTIFIED BY 'ninja';"
+mysql -p -e "GRANT ALL ON ninja.* To 'ninja'@'localhost' IDENTIFIED BY 'ninja';"
 echo -e 'User '$CYAN'ninja'$ENDCOLOR' was granted permissions on database '$CYAN'ninja'$ENDCOLOR
+
+echo
+sleep 1
+
+echo -n 'Set a server name for the application and press [ENTER]: (invoices.example.com)'
+read NINJA_SERVER_NAME
+if [ -z "$NINJA_SERVER_NAME" ]
+     then
+     echo -e '    No server name entered so setting default server name: '$CYAN'invoices.localhost'$ENDCOLOR
+     NINJA_SERVER_NAME=invoices.localhost
+fi
+sudo sed -i 's|NINJA_SERVER_NAME|'$NINJA_SERVER_NAME'|g' /etc/nginx/sites-available/ninja # change server name to listen to
+
+echo -e $YELLOW"--->Reloading Nginx..."$ENDCOLOR
+sudo service nginx reload
 
 echo
 sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-# composer -V
 echo
 
 pause 'Press [Enter] key to continue...'
