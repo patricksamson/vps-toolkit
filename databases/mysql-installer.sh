@@ -86,6 +86,19 @@ sudo apt-get -y install mysql-server
 echo
 sleep 1
 
+echo -e $YELLOW"--->Enabling remote access..."$ENDCOLOR
+# comment out this line to enable remote access
+sudo sed -i 's|bind-address|#bind-address|g' /etc/mysql/mysql.conf.d/mysqld.cnf
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Restarting "$SOFTNAME"..."$ENDCOLOR
+sudo service mysql restart
+
+echo
+sleep 1
+
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
 mysql -V
