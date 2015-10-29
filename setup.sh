@@ -47,6 +47,7 @@ echo -e $YELLOW'00. '$ENDCOLOR'Check and Update Lykegenes VPS ToolKit'
 echo -e $YELLOW'01. '$ENDCOLOR'Optimize server'
 echo -e $YELLOW'02. '$ENDCOLOR'Install the Base Tool and Utilities'
 echo -e $YELLOW'03. '$ENDCOLOR'Configure a new User'
+echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL User'
 echo -e $YELLOW'10. '$ENDCOLOR'Nginx - Install'
 echo -e $YELLOW'11. '$ENDCOLOR'Nginx - Uninstall'
 echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
@@ -88,6 +89,9 @@ case $option in
         ;;
     3| 03)
         sudo ./users/create-user.sh
+        ;;
+    4| 04)
+        sudo ./users/create-mysql-user.sh
         ;;
     10)
         sudo ./webservers/nginx-installer.sh
