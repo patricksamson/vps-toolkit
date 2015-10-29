@@ -92,7 +92,7 @@ sleep 1
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-mysql -V
+psql -V
 echo
 
 pause 'Press [Enter] key to continue...'
