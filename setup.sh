@@ -52,19 +52,19 @@ echo -e $YELLOW'10. '$ENDCOLOR'Nginx - Install'
 echo -e $YELLOW'11. '$ENDCOLOR'Nginx - Uninstall'
 echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
 echo -e $YELLOW'21. '$ENDCOLOR'PostgreSQL - Uninstall'
-echo -e $YELLOW'22. '$ENDCOLOR'PostgreSQL - Backup'
-echo -e $YELLOW'23. '$ENDCOLOR'MySQL - Install'
-echo -e $YELLOW'24. '$ENDCOLOR'MySQL - Uninstall'
-echo -e $YELLOW'25. '$ENDCOLOR'MySQL - Backup'
+echo -e $YELLOW'22. '$ENDCOLOR'MySQL - Install'
+echo -e $YELLOW'23. '$ENDCOLOR'MySQL - Uninstall'
 echo -e $YELLOW'30. '$ENDCOLOR'PHP - Install'
 echo -e $YELLOW'31. '$ENDCOLOR'PHP - Uninstall'
 echo -e $YELLOW'32. '$ENDCOLOR'HHVM - Install'
 echo -e $YELLOW'33. '$ENDCOLOR'HHVM - Uninstall'
 echo -e $YELLOW'34. '$ENDCOLOR'Composer - Install'
 echo -e $YELLOW'35. '$ENDCOLOR'Composer - Uninstall'
-echo -e $YELLOW'80. '$ENDCOLOR'Transmission Web UI - Install'
-echo -e $YELLOW'81. '$ENDCOLOR'Transmission Web UI - Uninstall'
-echo -e $YELLOW'82. '$ENDCOLOR'Invoice Ninja - Install'
+echo -e $YELLOW'60. '$ENDCOLOR'Transmission Web UI - Install'
+echo -e $YELLOW'61. '$ENDCOLOR'Transmission Web UI - Uninstall'
+echo -e $YELLOW'62. '$ENDCOLOR'Invoice Ninja - Install'
+echo -e $YELLOW'80. '$ENDCOLOR'PostgreSQL - Backup'
+echo -e $YELLOW'81. '$ENDCOLOR'MySQL - Backup'
 echo -e $YELLOW'99. '$ENDCOLOR'Exit'
 
 echo
@@ -113,9 +113,6 @@ case $option in
     23)
         sudo ./databases/mysql-uninstaller.sh
         ;;
-    24)
-        sudo ./databases/mysql-backup.sh
-        ;;
     30)
         sudo ./php/php-installer.sh
         ;;
@@ -134,14 +131,20 @@ case $option in
     35)
         sudo ./php/composer-uninstaller.sh
         ;;
-    80)
+    60)
         sudo ./utilities/transmission-webui-installer.sh
         ;;
-    81)
+    61)
         sudo ./utilities/transmission-webui-uninstaller.sh
         ;;
-    82)
+    62)
         sudo ./apps/invoice-ninja-installer.sh
+        ;;
+    80)
+        sudo ./databases/pgsql-backup.sh
+        ;;
+    81)
+        sudo ./databases/mysql-backup.sh
         ;;
     99)
         echo 'Exiting...'
