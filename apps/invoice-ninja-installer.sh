@@ -114,7 +114,7 @@ if [ -z "$NINJA_SERVER_NAME" ]
      echo -e '    No server name entered so setting default server name: '$CYAN'invoices.localhost'$ENDCOLOR
      NINJA_SERVER_NAME=invoices.localhost
 fi
-sudo sed -i 's|NINJA_SERVER_NAME|'$NINJA_SERVER_NAME'|g' /etc/nginx/sites-available/ninja # change server name to listen to
+sudo sed -i 's|NINJA_SERVER_NAME|'$NINJA_SERVER_NAME'|g' /etc/nginx/sites-enabled/ninja # change server name to listen to
 
 echo -e $YELLOW"--->Reloading Nginx..."$ENDCOLOR
 sudo service nginx reload

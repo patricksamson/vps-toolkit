@@ -7,6 +7,7 @@ Ubuntu (14.04 and later). May work on other version, variants and distributions 
 # Installation and Usage
 Clone repository on any Ubuntu based distro and execute the `setup.sh` bash script file.
 ```shell
+apt-get update
 apt-get install sudo git
 git clone https://github.com/Lykegenes/vps-toolkit
 cd ./vps-toolkit
