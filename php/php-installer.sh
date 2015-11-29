@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='PHP 5.6'
+SOFTNAME='PHP 7.0'
 
 # Test if Nginx is installed
 NGINX_IS_INSTALLED=1
@@ -61,9 +61,9 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
-GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep php5-5.6)
+GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep php-7.0)
 if [ "$GREPOUT" == "" ]; then
-    sudo add-apt-repository -y ppa:ondrej/php5-5.6
+    sudo add-apt-repository -y ppa:ondrej/php-7.0
 else
     echo $SOFTNAME" PPA repository already exists..."
 fi
@@ -78,13 +78,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y install php5-cli php5-fpm php5-json php5-curl php5-mysql php5-pgsql php5-sqlite php5-mcrypt
-
-echo
-sleep 1
-
-echo -e $YELLOW"--->Configuring mcrypt extension..."$ENDCOLOR
-sudo php5enmod mcrypt
+sudo apt-get -y install php7.0-cli php7.0-fpm php7.0-common php7.0-curl php7.0-mysql php7.0-pgsql php7.0-sqlite3
 
 echo
 sleep 1

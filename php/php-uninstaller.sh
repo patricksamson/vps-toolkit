@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='PHP 5.6'
+SOFTNAME='PHP 7.0'
 
 function pause(){
    read -p "$*"
@@ -49,7 +49,7 @@ fi
 echo
 
 echo -e $YELLOW"--->Uninstalling "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y remove php5-cli php5-fpm php5-json php5-curl php5-mysql php5-pgsql php5-sqlite php5-mcrypt
+sudo apt-get -y remove php7.0-cli php7.0-fpm php7.0-common php7.0-curl php7.0-mysql php7.0-pgsql php7.0-sqlite3
 sudo apt-get -y autoremove
 
 echo
