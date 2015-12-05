@@ -77,9 +77,15 @@ sudo apt-get -y install nginx
 echo
 sleep 1
 
-echo -e $YELLOW"--->Optimizing SSL Certificates security..."$ENDCOLOR
+echo -e $YELLOW"--->Creating SSL Certificates folder..."$ENDCOLOR
 sudo mkdir /certs
+sudo chown -R :www-data /certs
+echo -e $CYAN'/certs/'$ENDCOLOR ' - Folder created; put your SSL Certs in there'
+
+echo -e $YELLOW"--->Generating Diffie-Hellman keys; this will take some time..."$ENDCOLOR
+sudo rm -r /certs/dhparams.pem
 sudo openssl dhparam -out /certs/dhparams.pem 2048
+sudo chown -R :www-data /certs
 
 echo
 sleep 1
