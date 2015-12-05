@@ -77,6 +77,13 @@ sudo apt-get -y install nginx
 echo
 sleep 1
 
+echo -e $YELLOW"--->Optimizing SSL Certificates security..."$ENDCOLOR
+sudo mkdir /certs
+sudo openssl dhparam -out /certs/dhparams.pem 2048
+
+echo
+sleep 1
+
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
 nginx -v
