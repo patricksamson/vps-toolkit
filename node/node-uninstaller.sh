@@ -48,9 +48,24 @@ fi
 
 echo
 
+echo -e $YELLOW"--->Removing all NPM modules..."$ENDCOLOR
+npm ls -gp | awk -F/ '/node_modules/ && !/node_modules.*node_modules/ {print $NF}' | xargs npm -g r
+
+echo
+sleep 1
+
 echo -e $YELLOW"--->Removing "$SOFTNAME"..."$ENDCOLOR
 sudo apt-get -y remove nodejs build-essential
 sudo apt-get -y autoremove
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Removing leftovers..."$ENDCOLOR
+sudo rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/{npm*,node*,man1/node*}
+sudo rm -rf ~/{.cache,.node-gyp,.npm}
+sudo rm -f /usr/bin/bower
+sudo rm -rf /usr/lib/node_modules
 
 echo
 sleep 1
