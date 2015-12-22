@@ -82,7 +82,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Updating to latest version..."$ENDCOLOR
-git checkout tags/$TAG
+git checkout -f tags/$TAG
 
 echo
 sleep 1
