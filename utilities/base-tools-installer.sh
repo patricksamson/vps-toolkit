@@ -55,7 +55,19 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y install curl fail2ban git htop iftop iotop nano openssl software-properties-common sudo unzip wget
+sudo apt-get -y install \
+    curl \
+    fail2ban \
+    git \
+    htop \
+    iftop \
+    iotop \
+    nano \
+    openssl \
+    software-properties-common \
+    sudo \
+    unzip \
+    wget
 
 echo
 sleep 1
