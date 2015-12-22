@@ -74,9 +74,9 @@ git fetch
 echo
 sleep 1
 
-echo -e $YELLOW"--->Fetching Git Repository..."$ENDCOLOR
+echo -e $YELLOW"--->Scanning for latest version..."$ENDCOLOR
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-echo -e "Invoice Ninja will be updated to version : "$YELLOW $TAG $ENDCOLOR
+echo -e "Invoice Ninja will be updated to version : "$CYAN $TAG $ENDCOLOR
 
 echo
 sleep 1
