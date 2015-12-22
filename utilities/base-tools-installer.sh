@@ -66,6 +66,7 @@ sudo apt-get -y install \
     openssl \
     software-properties-common \
     sudo \
+    supervisor \
     unzip \
     wget
 
