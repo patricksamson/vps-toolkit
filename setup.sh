@@ -60,6 +60,8 @@ echo -e $YELLOW'32. '$ENDCOLOR'HHVM - Install'
 echo -e $YELLOW'33. '$ENDCOLOR'HHVM - Uninstall'
 echo -e $YELLOW'34. '$ENDCOLOR'Composer - Install'
 echo -e $YELLOW'35. '$ENDCOLOR'Composer - Uninstall'
+echo -e $YELLOW'36. '$ENDCOLOR'Node.js - Install'
+echo -e $YELLOW'37. '$ENDCOLOR'Node.js - Uninstall'
 echo -e $YELLOW'60. '$ENDCOLOR'Transmission Web UI - Install'
 echo -e $YELLOW'61. '$ENDCOLOR'Transmission Web UI - Uninstall'
 echo -e $YELLOW'62. '$ENDCOLOR'Invoice Ninja - Install'
@@ -131,6 +133,12 @@ case $option in
         ;;
     35)
         sudo ./php/composer-uninstaller.sh
+        ;;
+    36)
+        sudo ./node/node-installer.sh
+        ;;
+    37)
+        sudo ./node/node-uninstaller.sh
         ;;
     60)
         sudo ./utilities/transmission-webui-installer.sh
