@@ -63,6 +63,7 @@ echo -e $YELLOW'35. '$ENDCOLOR'Composer - Uninstall'
 echo -e $YELLOW'60. '$ENDCOLOR'Transmission Web UI - Install'
 echo -e $YELLOW'61. '$ENDCOLOR'Transmission Web UI - Uninstall'
 echo -e $YELLOW'62. '$ENDCOLOR'Invoice Ninja - Install'
+echo -e $YELLOW'62. '$ENDCOLOR'Invoice Ninja - Update'
 echo -e $YELLOW'80. '$ENDCOLOR'PostgreSQL - Backup'
 echo -e $YELLOW'81. '$ENDCOLOR'MySQL - Backup'
 echo -e $YELLOW'99. '$ENDCOLOR'Exit'
@@ -139,6 +140,9 @@ case $option in
         ;;
     62)
         sudo ./apps/invoice-ninja-installer.sh
+        ;;
+    63)
+        sudo ./apps/invoice-ninja-updater.sh
         ;;
     80)
         sudo ./databases/pgsql-backup.sh
