@@ -48,7 +48,7 @@ echo -e "  \ \ / /| |_) \___ \    | |/ _ \ / _ \| | |/ / | __|"
 echo -e "   \ V / |  __/ ___) |   | | (_) | (_) | |   <| | |_ "
 echo -e "    \_/  |_|   |____/    |_|\___/ \___/|_|_|\_\_|\__|"
 echo
-echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
+echo -e $GREEN'Lykegenes '$SOFTNAME' Updater Script'$ENDCOLOR
 
 echo
 read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
