@@ -77,6 +77,7 @@ case $option in
     0 | 00)
         echo
         echo -e $YELLOW'--->Checking for updates...'$ENDCOLOR
+        cd $SCRIPTPATH
         git fetch origin master
         git reset --hard FETCH_HEAD
         git clean -df
