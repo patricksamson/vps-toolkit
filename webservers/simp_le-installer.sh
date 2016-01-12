@@ -58,7 +58,7 @@ cd simp_le
  
 # Install
 sudo ./bootstrap.sh
-sud0 ./venv.sh
+sudo ./venv.sh
 sudo ln -s $(pwd)/venv/bin/simp_le /usr/local/sbin/simp_le
 
 echo
