@@ -50,6 +50,7 @@ echo -e $YELLOW'03. '$ENDCOLOR'Configure a new User'
 echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL User'
 echo -e $YELLOW'10. '$ENDCOLOR'Nginx - Install'
 echo -e $YELLOW'11. '$ENDCOLOR'Nginx - Uninstall'
+echo -e $YELLOW'12. '$ENDCOLOR'Simp_le Lets Encrypt Client - Install'
 echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
 echo -e $YELLOW'21. '$ENDCOLOR'PostgreSQL - Uninstall'
 echo -e $YELLOW'22. '$ENDCOLOR'MySQL - Install'
@@ -104,6 +105,9 @@ case $option in
         ;;
     11)
         sudo ./webservers/nginx-uninstaller.sh
+        ;;
+    12)
+        sudo ./webservers/simp_le-installer.sh
         ;;
     20)
         sudo ./databases/pgsql-installer.sh
