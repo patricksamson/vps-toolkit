@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='Simp_le Lets\' Encrypt Client'
+SOFTNAME='Simp_le Lets Encrypt Client'
 
 function pause(){
    read -p "$*"
