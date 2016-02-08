@@ -65,12 +65,12 @@ echo
 sleep 1
 
 echo
-echo -n 'Set the full webroot path for this domain and press [ENTER]: (/var/www/)'
+echo -n 'Set the full webroot path for this domain and press [ENTER]: (/certs/challenges/)'
 read WEBROOT
 if [ -z "$WEBROOT" ]
      then
-     echo -e '    No webroot path entered so setting default webroot: '$CYAN'/var/www/'$ENDCOLOR
-     WEBROOT=/var/www/
+     echo -e '    No webroot path entered so setting default webroot: '$CYAN'/certs/challenges/'$ENDCOLOR
+     WEBROOT=/certs/challenges/
 fi
 echo
 
