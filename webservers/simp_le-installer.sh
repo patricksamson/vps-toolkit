@@ -65,7 +65,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating SSL Certificates folder..."$ENDCOLOR
-sudo mkdir /certs
+sudo mkdir -p /certs/challenges
 sudo chown -R :www-data /certs
 echo -e $CYAN'/certs/'$ENDCOLOR ' - Folder created; put your SSL Certs in there'
 
