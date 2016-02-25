@@ -89,7 +89,7 @@ sudo chown -R :www-data /certs
 
 echo -e $YELLOW"--->Copying Configuration files..."$ENDCOLOR
 sudo mkdir -p /etc/nginx/vps-toolkit
-sudo cp -R -f $SCRIPTPATH/webservers/nginx-conf /etc/nginx/vps-toolkit
+sudo cp -R -f $SCRIPTPATH/webservers/nginx-conf/. /etc/nginx/vps-toolkit
 
 echo
 sleep 1
