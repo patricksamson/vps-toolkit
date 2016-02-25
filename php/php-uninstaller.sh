@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='PHP 7.0'
+SOFTNAME='PHP'
 
 function pause(){
    read -p "$*"

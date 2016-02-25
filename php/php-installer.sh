@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='PHP 7.0'
+SOFTNAME='PHP'
 
 # Test if Nginx is installed
 NGINX_IS_INSTALLED=1
@@ -61,9 +61,9 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
-GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep php-7.0)
+GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep php)
 if [ "$GREPOUT" == "" ]; then
-    sudo add-apt-repository -y ppa:ondrej/php-7.0
+    LC_ALL=en_US.UTF-8 sudo add-apt-repository -y ppa:ondrej/php
 else
     echo $SOFTNAME" PPA repository already exists..."
 fi

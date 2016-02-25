@@ -59,6 +59,8 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Setting server locales..."$ENDCOLOR
+sudo apt-get install -y language-pack-en-base
+sudo apt-get -y --reinstall install bsdutils
 sudo locale-gen en_CA en_CA.UTF-8 en_US en_US.UTF-8
 sudo dpkg-reconfigure locales
 

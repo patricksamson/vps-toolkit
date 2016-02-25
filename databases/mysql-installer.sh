@@ -57,7 +57,7 @@ sleep 1
 echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
 GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep ondrej-ubuntu-mysql)
 if [ "$GREPOUT" == "" ]; then
-    sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+    LC_ALL=en_US.UTF-8 sudo add-apt-repository -y ppa:ondrej/mysql-5.6
 else
     echo $SOFTNAME" PPA repository already exists..."
 fi
