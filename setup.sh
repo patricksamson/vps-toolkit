@@ -47,7 +47,7 @@ echo -e $YELLOW'00. '$ENDCOLOR'Check and Update Lykegenes VPS ToolKit'
 echo -e $YELLOW'01. '$ENDCOLOR'Optimize server'
 echo -e $YELLOW'02. '$ENDCOLOR'Install the Base Tool and Utilities'
 echo -e $YELLOW'03. '$ENDCOLOR'Configure a new User'
-echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL User'
+echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL or MariaDB User'
 echo -e $YELLOW'10. '$ENDCOLOR'Nginx - Install'
 echo -e $YELLOW'11. '$ENDCOLOR'Nginx - Uninstall'
 echo -e $YELLOW'12. '$ENDCOLOR'Simp_le Lets Encrypt Client - Install'
@@ -56,6 +56,8 @@ echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
 echo -e $YELLOW'21. '$ENDCOLOR'PostgreSQL - Uninstall'
 echo -e $YELLOW'22. '$ENDCOLOR'MySQL - Install'
 echo -e $YELLOW'23. '$ENDCOLOR'MySQL - Uninstall'
+echo -e $YELLOW'24. '$ENDCOLOR'MariaDB - Install'
+echo -e $YELLOW'25. '$ENDCOLOR'MariaDB - Uninstall'
 echo -e $YELLOW'30. '$ENDCOLOR'PHP - Install'
 echo -e $YELLOW'31. '$ENDCOLOR'PHP - Uninstall'
 echo -e $YELLOW'32. '$ENDCOLOR'HHVM - Install'
@@ -124,6 +126,12 @@ case $option in
         ;;
     23)
         sudo ./databases/mysql-uninstaller.sh
+        ;;
+    24)
+        sudo ./databases/mariadb-installer.sh
+        ;;
+    25)
+        sudo ./databases/mariadb-uninstaller.sh
         ;;
     30)
         sudo ./php/php-installer.sh
