@@ -13,7 +13,7 @@ SCRIPTPATH=$(pwd)
 
 SOFTNAME='Invoice Ninja'
 
-# Test if MySQL is installed
+# Test if MySQL (or MariaDB) is installed
 MYSQL_IS_INSTALLED=1
 hash mysql 2>/dev/null || {
     MYSQL_IS_INSTALLED=0
@@ -69,6 +69,19 @@ sleep 1
 
 echo -e $YELLOW"--->Cloning Git Repository..."$ENDCOLOR
 git clone --depth 1 https://github.com/hillelcoren/invoice-ninja.git /var/www/invoice-ninja
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Scanning for latest version..."$ENDCOLOR
+TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+echo -e "Invoice Ninja will be updated to version : "$CYAN $TAG $ENDCOLOR
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Checking out latest version..."$ENDCOLOR
+git checkout -f tags/$TAG
 
 echo
 sleep 1
