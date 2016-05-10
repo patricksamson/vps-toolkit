@@ -13,7 +13,8 @@ SCRIPTPATH=$(pwd)
 
 SOFTNAME='Lets Encrypt Sell Client'
 
-ACME_PATH='/var/www/letsencrypt'
+ACME_BASEPATH='/var/www/letsencrypt'
+ACME_SCRIPTPATH=$ACME_BASEPATH'/letsencrypt.sh'
 ACME_CONFIG='--config '$ACME_PATH'/settings.sh'
 
 function pause(){
@@ -78,20 +79,20 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Renewing certificates..."$ENDCOLOR
-sh $ACME_PATH/letsencrypt.sh -c $FORCE $DOMAIN $ACME_CONFIG
+bash $ACME_SCRIPTPATH -c $FORCE $DOMAIN $ACME_CONFIG
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Archiving unused certificates..."$ENDCOLOR
-sh $ACME_PATH/letsencrypt.sh $ACME_CONFIG --cleanup
+bash $ACME_SCRIPTPATH $ACME_CONFIG --cleanup
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
-sudo chown -R :www-data $ACME_PATH
-sudo chmod -R 775 $ACME_PATH
+sudo chown -R :www-data $ACME_BASEPATH
+sudo chmod -R 775 $ACME_BASEPATH
 
 echo
 sleep 1
