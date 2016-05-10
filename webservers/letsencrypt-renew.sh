@@ -15,7 +15,7 @@ SOFTNAME='Lets Encrypt Sell Client'
 
 ACME_BASEPATH='/var/www/letsencrypt'
 ACME_SCRIPTPATH=$ACME_BASEPATH'/letsencrypt.sh'
-ACME_CONFIG='--config '$ACME_PATH'/settings.sh'
+ACME_CONFIG='--config '$ACME_BASEPATH'/settings.sh'
 
 function pause(){
    read -p "$*"
