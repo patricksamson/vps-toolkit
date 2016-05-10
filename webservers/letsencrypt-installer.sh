@@ -11,7 +11,9 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='Simp_le Lets Encrypt Client'
+SOFTNAME='Lets Encrypt Sell Client'
+
+ACME_PATH='/var/www/letsencrypt'
 
 function pause(){
    read -p "$*"
@@ -51,30 +53,26 @@ fi
 echo
 
 echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
-# Clone
-cd /opt
-sudo git clone https://github.com/kuba/simp_le
-cd simp_le
- 
-# Install
-sudo ./bootstrap.sh
-sudo ./venv.sh
-sudo ln -s $(pwd)/venv/bin/simp_le /usr/local/sbin/simp_le
+sudo git clone https://github.com/lukas2511/letsencrypt.sh $ACME_PATH
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Creating SSL Certificates folder..."$ENDCOLOR
-sudo mkdir -p /certs/challenges
-sudo chown -R :www-data /certs
-echo -e $CYAN'/certs/'$ENDCOLOR ' - Folder created; put your SSL Certs in there'
+sudo mkdir -p $ACME_PATH/certs/
+sudo mkdir -p $ACME_PATH/archive/
+sudo mkdir -p $ACME_PATH/.acme-challenge/
+sudo chown -R :www-data $ACME_PATH
+sudo chmod -R 775 $ACME_PATH
+echo -e $CYAN$ACME_PATH$ENDCOLOR ' - Folder created; your SSL Certificates will be in there'
 
 echo
-sleep 1
+
+echo -e $YELLOW"--->Copying Configuration files..."$ENDCOLOR
+sudo cp -R -f $SCRIPTPATH/webservers/letsencrypt-settings.conf $ACME_PATH/settings.sh
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR
-simp_le --version
 echo
 
 pause 'Press [Enter] key to continue...'
