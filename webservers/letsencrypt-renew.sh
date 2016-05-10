@@ -70,7 +70,7 @@ sleep 1
 
 read -p 'Force certificate renewal? Type y/Y and press [ENTER]: (default: N)'
 RESP=${REPLY,,}
-if [ "$RESP" != "y" ]
+if [ "$RESP" == "y" ]
 then
     FORCE='--force'
 fi
