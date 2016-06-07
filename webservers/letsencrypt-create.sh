@@ -33,7 +33,7 @@ echo -e "  \ \ / /| |_) \___ \    | |/ _ \ / _ \| | |/ / | __|"
 echo -e "   \ V / |  __/ ___) |   | | (_) | (_) | |   <| | |_ "
 echo -e "    \_/  |_|   |____/    |_|\___/ \___/|_|_|\_\_|\__|"
 echo
-echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
+echo -e $GREEN'Lykegenes '$SOFTNAME' Certificate creator Script'$ENDCOLOR
 
 echo
 echo -e $CYAN"You might need to stop some services in low-memory environments..."$ENDCOLOR
@@ -54,14 +54,16 @@ fi
 echo
 
 echo
-echo -n 'Set the domain or subdomain name that you want to renew and press [ENTER]: (default: empty; renew all)'
-read TEMPDOMAIN
-if [ -z "$TEMPDOMAIN" ]
-     then
-     echo -e 'No domain entered. '$CYAN'Attempting to renew all certificates...'$ENDCOLOR
-     DOMAIN=''
+echo -n 'Set the domain or subdomain name that you want to create and press [ENTER]:'
+read DOMAIN_NAME
+if [ -z "$DOMAIN_NAME" ]
+    then
+    echo -e $RED'No domain entered. Aborting. Press [Enter] key to continue...'$ENDCOLOR
+    cd $SCRIPTPATH
+    sudo ./setup.sh
+    exit 0
 else
-    DOMAIN='-d '$TEMPDOMAIN
+    DOMAIN_PARAM='-d '$DOMAIN_NAME
 fi
 echo
 
@@ -73,18 +75,20 @@ if [ "$RESP" == "y" ]
 then
     FORCE='--force'
 fi
-echo
-
-sleep 1
-
-echo -e $YELLOW"--->Renewing certificates..."$ENDCOLOR
-bash $ACME_SCRIPTPATH -c $FORCE $DOMAIN
 
 echo
 sleep 1
 
-echo -e $YELLOW"--->Archiving unused certificates..."$ENDCOLOR
-bash $ACME_SCRIPTPATH --cleanup
+echo -e $YELLOW"--->Copying temporary nginx config file..."$ENDCOLOR
+TEMP_NGINX_CONF='/etc/nginx/sites-enabled/letsencrypt'
+sudo cp -f $SCRIPTPATH/webservers/letsencrypt-nginx-new-cert $TEMP_NGINX_CONF
+sudo nginx -s reload
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Creating certificate..."$ENDCOLOR
+bash $ACME_SCRIPTPATH -c $FORCE $DOMAIN_PARAM
 
 echo
 sleep 1
@@ -92,6 +96,13 @@ sleep 1
 echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
 sudo chown -R :www-data $ACME_BASEPATH
 sudo chmod -R 775 $ACME_BASEPATH
+
+echo
+sleep 1
+
+echo -e $YELLOW"--->Cleaning up temporary files..."$ENDCOLOR
+sudo rm -f $TEMP_NGINX_CONF
+sed -i 's|DOMAIN_NAME|'$UNAME'|g' $TEMP_NGINX_CONF || { echo -e $RED'Failed to setup temporary Nginx config.'$ENDCOLOR ; exit 1; }
 
 echo
 sleep 1

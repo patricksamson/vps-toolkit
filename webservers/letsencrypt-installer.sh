@@ -11,7 +11,7 @@ CYAN='\e[96m'
 GREEN='\e[92m'
 SCRIPTPATH=$(pwd)
 
-SOFTNAME='Lets Encrypt Sell Client'
+SOFTNAME='Lets Encrypt Shell Client'
 
 ACME_PATH='/var/www/letsencrypt'
 
@@ -59,17 +59,10 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating SSL Certificates folder..."$ENDCOLOR
-sudo mkdir -p $ACME_PATH/certs/
-sudo mkdir -p $ACME_PATH/archive/
-sudo mkdir -p $ACME_PATH/.acme-challenge/
+sudo mkdir -p $ACME_PATH/.acme-challenges/
 sudo chown -R :www-data $ACME_PATH
 sudo chmod -R 775 $ACME_PATH
 echo -e $CYAN$ACME_PATH$ENDCOLOR ' - Folder created; your SSL Certificates will be in there'
-
-echo
-
-echo -e $YELLOW"--->Copying Configuration files..."$ENDCOLOR
-sudo cp -R -f $SCRIPTPATH/webservers/letsencrypt-settings.conf $ACME_PATH/settings.sh
 
 echo
 echo -e $GREEN'--->All done. '$ENDCOLOR

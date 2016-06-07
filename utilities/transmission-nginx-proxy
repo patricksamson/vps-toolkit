@@ -1,4 +1,4 @@
-\upstream transmissionweb {
+upstream transmissionweb {
     server localhost:9091;
 }
 
@@ -22,10 +22,6 @@ server {
     include vps-toolkit/ssl.conf;
 
     root /var/www/transmission;
-
-    location /.well-known/acme-challenge/ {
-        root /certs/challenges/;
-    }
 
     location /transmission {
         proxy_pass          http://transmissionweb;
