@@ -82,7 +82,7 @@ sleep 1
 echo -e $YELLOW"--->Copying temporary nginx config file..."$ENDCOLOR
 TEMP_NGINX_CONF='/etc/nginx/sites-enabled/letsencrypt'
 sudo cp -f $SCRIPTPATH/webservers/letsencrypt-nginx-new-cert $TEMP_NGINX_CONF
-sed -i 's|DOMAIN_NAME|'$UNAME'|g' $TEMP_NGINX_CONF || { echo -e $RED'Failed to setup temporary Nginx config.'$ENDCOLOR ; exit 1; }
+sed -i 's|DOMAIN_NAME|'$DOMAIN_NAME'|g' $TEMP_NGINX_CONF || { echo -e $RED'Failed to setup temporary Nginx config.'$ENDCOLOR ; exit 1; }
 sudo nginx -s reload
 
 echo
