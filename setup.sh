@@ -184,7 +184,7 @@ case $option in
         echo
         echo -e $YELLOW'Thank you for using the Lykegenes VPS ToolKit!'$ENDCOLOR
         echo
-        sleep 2
+        sleep 1
         ;;
     *)
         echo -e $RED'Invalid Option'$ENDCOLOR

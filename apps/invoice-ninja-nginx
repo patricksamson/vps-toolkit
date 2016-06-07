@@ -8,23 +8,22 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-
     server_name NINJA_SERVER_NAME;
 
-    include vps-toolkit/ssl.conf;
     ssl_certificate /var/www/letsencrypt/certs/NINJA_SERVER_NAME/fullchain.pem;
     ssl_certificate_key /var/www/letsencrypt/certs/NINJA_SERVER_NAME/privkey.pem;
     ssl_trusted_certificate /var/www/letsencrypt/certs/NINJA_SERVER_NAME/fullchain.pem;
+    include vps-toolkit/ssl.conf;
 
     root /var/www/invoice-ninja/public;
-    index index.html index.htm index.php;
+
+    # enable letsencrypt
+    location /.well-known/acme-challenge/ {
+        alias /var/www/letsencrypt/.acme-challenges/;
+    }
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ /\.ht {
-        deny all;
     }
 
     location ~ \.php$ {
