@@ -15,9 +15,9 @@ server {
 
     server_name TRANSMISSION_SERVER_NAME;
 
-    ssl_certificate /certs/TRANSMISSION_SERVER_NAME/fullchain.pem;
-    ssl_certificate_key /certs/TRANSMISSION_SERVER_NAME/key.pem;
-    ssl_trusted_certificate /certs/TRANSMISSION_SERVER_NAME/fullchain.pem;
+    ssl_certificate /var/www/letsencrypt/certs/TRANSMISSION_SERVER_NAME/fullchain.pem;
+    ssl_certificate_key /var/www/letsencrypt/certs/TRANSMISSION_SERVER_NAME/privkey.pem;
+    ssl_trusted_certificate /var/www/letsencrypt/certs/TRANSMISSION_SERVER_NAME/fullchain.pem;
 
     include vps-toolkit/ssl.conf;
 
