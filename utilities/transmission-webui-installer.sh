@@ -70,12 +70,7 @@ UGROUP=($(id -gn $UNAME))
 echo
 
 echo -e $YELLOW"--->Adding "$SOFTNAME" repository..."$ENDCOLOR
-GREPOUT=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep nginx)
-if [ "$GREPOUT" == "" ]; then
-    sudo add-apt-repository -y ppa:transmissionbt/ppa
-else
-    echo $SOFTNAME" PPA repository already exists..."
-fi
+sudo add-apt-repository -y ppa:transmissionbt/ppa
 
 echo
 sleep 1

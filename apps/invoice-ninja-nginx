@@ -16,6 +16,7 @@ server {
     include vps-toolkit/ssl.conf;
 
     root /var/www/invoice-ninja/public;
+    index index.html index.htm index.php;
 
     # enable letsencrypt
     location /.well-known/acme-challenge/ {

@@ -36,8 +36,6 @@ echo
 echo -e $GREEN'Lykegenes '$SOFTNAME' Certificate creator Script'$ENDCOLOR
 
 echo
-echo -e $CYAN"You might need to stop some services in low-memory environments..."$ENDCOLOR
-echo
 read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
 RESP=${REPLY,,}
 
@@ -67,15 +65,6 @@ else
 fi
 echo
 
-sleep 1
-
-read -p 'Force certificate renewal? Type y/Y and press [ENTER]: (default: N)'
-RESP=${REPLY,,}
-if [ "$RESP" == "y" ]
-then
-    FORCE='--force'
-fi
-
 echo
 sleep 1
 
@@ -89,7 +78,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating certificate..."$ENDCOLOR
-bash $ACME_SCRIPTPATH -c $FORCE $DOMAIN_PARAM
+bash $ACME_SCRIPTPATH -c $DOMAIN_PARAM
 
 echo
 sleep 1

@@ -107,6 +107,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Creating Database..."$ENDCOLOR
+echo -e $CYAN'You will be asked the root MySQL or MariaDB password...'$ENDCOLOR
 # create the database if it does exist
 mysql -p -e "create database IF NOT EXISTS ninja;"
 mysql -p -e "CREATE SCHEMA ninja DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"

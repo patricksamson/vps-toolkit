@@ -75,6 +75,7 @@ echo
 sleep 1
 
 echo -e $YELLOW'--->Creating the user...'$ENDCOLOR
+echo -e $CYAN'You will be asked the root MySQL or MariaDB password...'$ENDCOLOR
 # grant access to all databases and tables ( *.* )
 # grant remote access from anywhere ( @'%' , instead of @'localhost' )
 mysql -p -e "GRANT ALL ON *.* To '$UNAME'@'%' IDENTIFIED BY '$UPASS';"

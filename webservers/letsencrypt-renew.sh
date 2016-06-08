@@ -36,8 +36,6 @@ echo
 echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
 
 echo
-echo -e $CYAN"You might need to stop some services in low-memory environments..."$ENDCOLOR
-echo
 read -p 'Type y/Y and press [ENTER] to continue with the installation or any other key to exit: '
 RESP=${REPLY,,}
 
