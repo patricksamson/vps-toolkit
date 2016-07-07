@@ -69,7 +69,7 @@ sleep 1
 
 echo -e $YELLOW"--->Fetching Git Repository..."$ENDCOLOR
 cd /var/www/invoice-ninja
-git fetch
+git fetch --depth=1 --tags
 
 echo
 sleep 1

@@ -68,12 +68,16 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Cloning Git Repository..."$ENDCOLOR
-git clone --depth 1 https://github.com/hillelcoren/invoice-ninja.git /var/www/invoice-ninja
+# Make a shallow clone in order to save some space
+git clone https://github.com/hillelcoren/invoice-ninja.git /var/www/invoice-ninja --branch master --single-branch --depth 1
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Scanning for latest version..."$ENDCOLOR
+# Fetch tags from origin, with minimal commit history
+git fetch --depth=1 --tags
+# Get the tag of the latest release
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 echo -e "Invoice Ninja will be updated to version : "$CYAN $TAG $ENDCOLOR
 
