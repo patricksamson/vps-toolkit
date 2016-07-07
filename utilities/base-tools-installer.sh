@@ -48,6 +48,12 @@ fi
 
 echo
 
+echo -e $YELLOW'--->Adding repository sources...'$ENDCOLOR
+sudo add-apt-repository -y ppa:git-core/ppa
+
+echo
+sleep 1
+
 echo -e $YELLOW'--->Refreshing packages list...'$ENDCOLOR
 sudo apt-get update
 
