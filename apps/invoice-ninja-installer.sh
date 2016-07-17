@@ -67,16 +67,18 @@ fi
 echo
 sleep 1
 
+NINJA_PATH='/var/www/invoice-ninja'
+
 echo -e $YELLOW"--->Cloning Git Repository..."$ENDCOLOR
 # Make a shallow clone in order to save some space
-git clone https://github.com/hillelcoren/invoice-ninja.git /var/www/invoice-ninja --branch master --single-branch --depth 1
+git clone https://github.com/hillelcoren/invoice-ninja.git $NINJA_PATH --branch master --single-branch --depth 1
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Scanning for latest version..."$ENDCOLOR
 # Fetch tags from origin, with minimal commit history
-git fetch --depth=1 --tags
+git fetch --depth=1 --tags $NINJA_PATH
 # Get the tag of the latest release
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 echo -e "Invoice Ninja will be updated to version : "$CYAN $TAG $ENDCOLOR
@@ -85,13 +87,13 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Checking out latest version..."$ENDCOLOR
-git checkout -f tags/$TAG
+git checkout -f tags/$TAG $NINJA_PATH
 
 echo
 sleep 1
 
 echo -e $YELLOW"--->Installing dependencies..."$ENDCOLOR
-composer install -d /var/www/invoice-ninja
+composer install -d $NINJA_PATH
 
 echo
 sleep 1
@@ -104,8 +106,8 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Setting permissions..."$ENDCOLOR
-sudo chown -R $UNAME:www-data /var/www/invoice-ninja
-sudo chmod -R 775 /var/www/invoice-ninja
+sudo chown -R $UNAME:www-data $NINJA_PATH
+sudo chmod -R 775 $NINJA_PATH
 
 echo
 sleep 1
