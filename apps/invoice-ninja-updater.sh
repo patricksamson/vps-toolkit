@@ -21,7 +21,7 @@ hash mysql 2>/dev/null || {
 
 # Test if PHP is installed
 PHP_IS_INSTALLED=1
-hash mysql 2>/dev/null || {
+hash php 2>/dev/null || {
     PHP_IS_INSTALLED=0
 }
 
