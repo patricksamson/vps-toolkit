@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__.'/autoload.php';
-
 /*
 |--------------------------------------------------------------------------
 | Run The Console Application
@@ -12,5 +11,4 @@ require __DIR__.'/autoload.php';
 | or another output device for the developers. Here goes nothing!
 |
 */
-
-(new NunoMaduro\ZeroFramework\Application)->run();
+(new LaravelZero\Framework\Application())->run();

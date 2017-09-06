@@ -2,7 +2,7 @@
 
 namespace App\Commands;
 
-use NunoMaduro\ZeroFramework\Commands\AbstractCommand;
+use LaravelZero\Framework\Commands\AbstractCommand;
 
 class DefaultCommand extends AbstractCommand
 {
@@ -23,8 +23,6 @@ class DefaultCommand extends AbstractCommand
     /**
      * Execute the console command. Here goes the command
      * code.
-     *
-     * @return void
      */
     public function handle(): void
     {

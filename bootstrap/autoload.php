@@ -1,9 +1,8 @@
 <?php
 
-if (! defined('BASE_PATH')) {
+if (!defined('BASE_PATH')) {
     define('BASE_PATH', dirname(__DIR__));
 }
-
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
@@ -15,7 +14,6 @@ if (! defined('BASE_PATH')) {
 | our application's PHP classes. It just feels great to relax.
 |
 */
-
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     require __DIR__.'/../vendor/autoload.php';
 } else {
