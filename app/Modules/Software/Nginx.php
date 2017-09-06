@@ -2,8 +2,12 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasService;
+
 class Nginx extends AbstractAptGetSoftware
 {
+    use HasService;
+
     protected $repository = 'nginx/development';
 
     protected $packages = [

@@ -2,8 +2,12 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasService;
+
 class Transmission extends AbstractAptGetSoftware
 {
+    use HasService;
+
     protected $repository = 'transmissionbt/ppa';
 
     protected $packages = [

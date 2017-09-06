@@ -2,12 +2,13 @@
 
 namespace App\Modules\Software;
 
-abstract class AbstractAptGetSoftware
+use App\Modules\Contracts\Installable;
+
+abstract class AbstractAptGetSoftware implements Installable
 {
     protected $repository;
     protected $packages = [];
     protected $executable;
-    protected $service;
 
     public function install()
     {
@@ -32,7 +33,7 @@ abstract class AbstractAptGetSoftware
             // Is this repository already in our sources?
             $found = `grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep {$this->repository}`;
 
-            if (!empty($found)) {
+            if (empty($found)) {
                 $output = `sudo add-apt-repository -y ppa:{$this->repository}`;
             }
         }
@@ -49,40 +50,7 @@ abstract class AbstractAptGetSoftware
         $output = `sudo apt-get -y install $packagesList`;
     }
 
-    public function hasService()
-    {
-        return $this->service != null;
-    }
-
-    public function startService()
-    {
-        if ($this->hasService()) {
-            `sudo service {$this->service} start`;
-        }
-    }
-
-    public function reloadService()
-    {
-        if ($this->hasService()) {
-            `sudo service {$this->service} reload`;
-        }
-    }
-
-    public function restartService()
-    {
-        if ($this->hasService()) {
-            `sudo service {$this->service} restart`;
-        }
-    }
-
-    public function stopService()
-    {
-        if ($this->hasService()) {
-            `sudo service {$this->service} stop`;
-        }
-    }
-
-    abstract public function getVersion();
+    abstract public function getVersion(): string;
 
     public function isInstalled(): bool
     {

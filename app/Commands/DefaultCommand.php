@@ -26,7 +26,15 @@ class DefaultCommand extends AbstractCommand
      */
     public function handle(): void
     {
-        $this->info('Love beautiful code? We do too.');
-        $this->notify('Hey Artisan', 'Enjoy the fresh air!');
+        $this->line('Line');
+        $this->info('Info');
+        $this->comment('Comment');
+        $this->question('Question');
+        $this->error('Error');
+        $this->warn('Warn');
+        $this->alert('Alert');
+
+        $this->confirm('Confirm?');
+        $this->ask('Ask Question?');
     }
 }

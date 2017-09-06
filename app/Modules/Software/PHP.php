@@ -2,8 +2,12 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasService;
+
 class PHP extends AbstractAptGetSoftware
 {
+    use HasService;
+
     protected $repository = 'ondrej/php';
 
     protected $executable = 'php';

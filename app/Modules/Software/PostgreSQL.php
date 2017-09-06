@@ -2,8 +2,12 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasService;
+
 class PostgreSQL extends AbstractAptGetSoftware
 {
+    use HasService;
+
     protected $packages = [
         'postgresql',
         'postgresql-contrib',

@@ -2,8 +2,12 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasService;
+
 class MariaDB extends AbstractAptGetSoftware
 {
+    use HasService;
+
     protected $packages = [
         'mariadb-server',
     ];
