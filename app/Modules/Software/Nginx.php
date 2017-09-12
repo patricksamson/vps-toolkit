@@ -17,7 +17,9 @@ class Nginx extends AbstractAptGetSoftware
     protected $executable = 'nginx';
     protected $service = 'nginx';
 
-    public function getVersion()
+    protected $dependencies = [];
+
+    public function getVersion(): string
     {
         return `nginx -v`;
     }

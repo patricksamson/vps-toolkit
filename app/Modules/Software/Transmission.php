@@ -19,7 +19,9 @@ class Transmission extends AbstractAptGetSoftware
     protected $executable = 'transmission-daemon';
     protected $service = 'transmission-daemon';
 
-    public function getVersion()
+    protected $dependencies = [Nginx::class];
+
+    public function getVersion(): string
     {
         return `transmission-daemon -V`;
     }

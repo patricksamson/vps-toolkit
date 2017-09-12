@@ -2,13 +2,23 @@
 
 namespace App\Modules\Software;
 
+use App\Modules\Concerns\HasDependencies;
 use App\Modules\Contracts\Installable;
+use App\Modules\Utils\ShellOutput;
 
 abstract class AbstractAptGetSoftware implements Installable
 {
+    use HasDependencies;
+
+    protected $ouptut;
     protected $repository;
     protected $packages = [];
     protected $executable;
+
+    public function __construct(ShellOutput $ouptut)
+    {
+        $this->output = $ouptut;
+    }
 
     public function install()
     {
@@ -21,7 +31,7 @@ abstract class AbstractAptGetSoftware implements Installable
     {
         /**
          * apt-get remove : Remove the software, but keep the configuration files.
-         * apt-get purge. : Also delete the configuration files.
+         * apt-get purge  : Also delete the configuration files.
          */
         $packagesList = implode(' ', $this->packages);
         $output = `sudo apt-get remove {$packagesList}`;

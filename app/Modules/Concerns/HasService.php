@@ -4,8 +4,6 @@ namespace App\Modules\Concerns;
 
 trait HasService
 {
-    protected $service;
-
     public function hasService()
     {
         return $this->service != null;

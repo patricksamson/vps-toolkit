@@ -11,7 +11,7 @@ class DemoCommand extends AbstractCommand
      *
      * @var string
      */
-    protected $name = 'demo';
+    protected $name = 'test:demo';
 
     /**
      * The description of the command.

@@ -36,5 +36,12 @@ class DefaultCommand extends AbstractCommand
 
         $this->confirm('Confirm?');
         $this->ask('Ask Question?');
+
+        //$shell = $this->getContainer()->make(\App\Modules\Utils\ShellCommand::class);
+        //$shell->execute('ls -la');
+
+        $nginx = $this->getContainer()->make(\App\Modules\Software\Nginx::class);
+        //$nginx = new \App\Modules\Software\Nginx();
+        $nginx->test();
     }
 }
