@@ -8,6 +8,9 @@ class Nginx extends AbstractAptGetSoftware
 {
     use HasService;
 
+    protected $name = 'Nginx';
+    protected $description = '';
+
     protected $repository = 'nginx/development';
 
     protected $packages = [
@@ -21,6 +24,6 @@ class Nginx extends AbstractAptGetSoftware
 
     public function getVersion(): string
     {
-        return `nginx -v`;
+        return ''.`nginx -v`;
     }
 }

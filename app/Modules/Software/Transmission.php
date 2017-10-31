@@ -8,6 +8,9 @@ class Transmission extends AbstractAptGetSoftware
 {
     use HasService;
 
+    protected $name = 'Transmission';
+    protected $description = '';
+
     protected $repository = 'transmissionbt/ppa';
 
     protected $packages = [
@@ -23,6 +26,6 @@ class Transmission extends AbstractAptGetSoftware
 
     public function getVersion(): string
     {
-        return `transmission-daemon -V`;
+        return ''.`transmission-daemon -V`;
     }
 }

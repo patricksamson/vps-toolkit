@@ -8,6 +8,9 @@ class MariaDB extends AbstractAptGetSoftware
 {
     use HasService;
 
+    protected $name = 'MariaDB';
+    protected $description = '';
+
     protected $packages = [
         'mariadb-server',
     ];
@@ -22,7 +25,7 @@ class MariaDB extends AbstractAptGetSoftware
         `sudo add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu {$lsb_release} main'`;
     }
 
-    public function getVersion()
+    public function getVersion(): string
     {
         return `mysql -V`;
     }

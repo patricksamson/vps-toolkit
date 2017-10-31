@@ -8,6 +8,9 @@ class PHP extends AbstractAptGetSoftware
 {
     use HasService;
 
+    protected $name = 'PHP';
+    protected $description = '';
+
     protected $repository = 'ondrej/php';
 
     protected $executable = 'php';
@@ -32,7 +35,7 @@ class PHP extends AbstractAptGetSoftware
         'php7.1-zip',
     ];
 
-    public function getVersion()
+    public function getVersion(): string
     {
         return `php -v`;
     }

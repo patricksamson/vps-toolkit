@@ -8,6 +8,9 @@ class PostgreSQL extends AbstractAptGetSoftware
 {
     use HasService;
 
+    protected $name = 'PostgreSQL';
+    protected $description = '';
+
     protected $packages = [
         'postgresql',
         'postgresql-contrib',
@@ -23,8 +26,8 @@ class PostgreSQL extends AbstractAptGetSoftware
         `wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -`;
     }
 
-    public function getVersion()
+    public function getVersion(): string
     {
-        return `psql -v`;
+        return ''.`psql -v`;
     }
 }

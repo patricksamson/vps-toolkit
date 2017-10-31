@@ -4,21 +4,14 @@ namespace App\Modules\Software;
 
 use App\Modules\Concerns\HasDependencies;
 use App\Modules\Contracts\Installable;
-use App\Modules\Utils\ShellOutput;
 
-abstract class AbstractAptGetSoftware implements Installable
+abstract class AbstractAptGetSoftware extends AbstractBaseSoftware implements Installable
 {
     use HasDependencies;
 
-    protected $ouptut;
     protected $repository;
     protected $packages = [];
     protected $executable;
-
-    public function __construct(ShellOutput $ouptut)
-    {
-        $this->output = $ouptut;
-    }
 
     public function install()
     {

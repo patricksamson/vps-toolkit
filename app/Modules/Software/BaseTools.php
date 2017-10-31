@@ -4,6 +4,9 @@ namespace App\Modules\Software;
 
 class BaseTools extends AbstractAptGetSoftware
 {
+    protected $name = 'Base Tools';
+    protected $description = 'Installs many basics tools such as Git, Nano, curl, ...';
+
     protected $repository = 'git-core/ppa';
 
     protected $packages = [
@@ -23,7 +26,13 @@ class BaseTools extends AbstractAptGetSoftware
         'wget',
     ];
 
-    public function getVersion()
+    public function getVersion(): string
     {
+        return 'unknown';
+    }
+
+    public function isInstalled(): bool
+    {
+        return !empty(`which supervisor`);
     }
 }
