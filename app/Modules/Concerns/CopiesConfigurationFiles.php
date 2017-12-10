@@ -4,14 +4,11 @@ namespace App\Modules\Concerns;
 
 trait CopiesConfigurationFiles
 {
-    protected $configurationFiles = [
-        // 'source_path' => 'destination/path',
-    ];
-
-    public function copyConfigurationFiles()
+    public function copyConfigurationFile($source, $destination)
     {
-        foreach ($this->configurationFiles as $source => $destination) {
-            // TODO
-        }
+        // Recursively create destination folder
+        $bool = mkdir($destination, 0777, true);
+
+        $bool = copy($source, $destination);
     }
 }

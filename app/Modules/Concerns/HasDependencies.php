@@ -16,13 +16,7 @@ trait HasDependencies
 
     public function installDependencies()
     {
-        $list = [];
-
-        foreach ($this->dependencies as $dep) {
-            array_push($list, [$dep]);
-        }
-
-        $this->shell->table(['Dependencies'], $list);
+        $this->printDependencies();
 
         foreach ($this->dependencies as $dep) {
             if (is_subclass_of($dep, Installable::class)) {
@@ -32,5 +26,16 @@ trait HasDependencies
                 }
             }
         }
+    }
+
+    public function printDependencies()
+    {
+        $list = [];
+
+        foreach ($this->dependencies as $dep) {
+            array_push($list, [$dep]);
+        }
+
+        $this->shell->table(['Dependencies'], $list);
     }
 }

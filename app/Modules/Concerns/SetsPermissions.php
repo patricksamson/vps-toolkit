@@ -4,9 +4,9 @@ namespace App\Modules\Concerns;
 
 trait SetsPermissions
 {
-    protected $permissions = [];
+    //protected $permissions = [];
 
-    public function setPermissions()
+    public function setPermissionsRecursive()
     {
         // TODO
 
@@ -17,5 +17,20 @@ trait SetsPermissions
          * - set access level
          * - file or path
          */
+    }
+
+    public function setPermission(string $filename, int $mode = 0755)
+    {
+        $bool = chmod($filename, $mode);
+    }
+
+    public function setOwner(string $filename, string $user)
+    {
+        $bool = chown($filename, $user);
+    }
+
+    public function setGroup(string $filename, string $group)
+    {
+        $bool = chgrp($filename, $group);
     }
 }
