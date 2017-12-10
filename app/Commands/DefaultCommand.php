@@ -48,12 +48,12 @@ class DefaultCommand extends Command
 
         //$modules = config('modules');
         $modules = new Collection();
-        foreach (config('modules') as $moduleClass) {
+        foreach (config('modules.enabled') as $moduleClass) {
             $instance = $this->getContainer()->make($moduleClass);
             $modules->put($instance->getKey(), $instance);
         }
 
-        $headers = ['Name', 'Description', 'Installed?'];
+        $headers = ['Name', 'Installed?', 'Description'];
         $modulesAutocomplete = [];
         foreach ($modules as $module) {
             $modulesAutocomplete[] = $module->getName();
@@ -62,8 +62,8 @@ class DefaultCommand extends Command
         $rows = $modules->map(function ($module) {
             return [
                 'name' => $module->getName(),
+                'installed' => $module->isInstalled() ? '✔ Yes' : '✘ No',
                 'description' => $module->getDescription() ?? '',
-                'installed' => $module->isInstalled() ? 'Yes' : 'No',
             ];
         });
 
