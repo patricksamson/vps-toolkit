@@ -47,6 +47,81 @@ class ShellOutput
     }
 
     /**
+     * Write a string as information output.
+     *
+     * @param string          $string
+     * @param null|int|string $verbosity
+     */
+    public function info($string, $verbosity = null)
+    {
+        $this->line($string, 'info', $verbosity);
+    }
+
+    /**
+     * Write a string as comment output.
+     *
+     * @param string          $string
+     * @param null|int|string $verbosity
+     */
+    public function comment($string, $verbosity = null)
+    {
+        $this->line($string, 'comment', $verbosity);
+    }
+
+    /**
+     * Write a string as question output.
+     *
+     * @param string          $string
+     * @param null|int|string $verbosity
+     */
+    public function question($string, $verbosity = null)
+    {
+        $this->line($string, 'question', $verbosity);
+    }
+
+    /**
+     * Write a string as error output.
+     *
+     * @param string          $string
+     * @param null|int|string $verbosity
+     */
+    public function error($string, $verbosity = null)
+    {
+        $this->line($string, 'error', $verbosity);
+    }
+
+    /**
+     * Write a string as warning output.
+     *
+     * @param string          $string
+     * @param null|int|string $verbosity
+     */
+    public function warn($string, $verbosity = null)
+    {
+        if (!$this->output->getFormatter()->hasStyle('warning')) {
+            $style = new OutputFormatterStyle('yellow');
+
+            $this->output->getFormatter()->setStyle('warning', $style);
+        }
+
+        $this->line($string, 'warning', $verbosity);
+    }
+
+    /**
+     * Write a string in an alert box.
+     *
+     * @param string $string
+     */
+    public function alert($string)
+    {
+        $this->comment(str_repeat('*', strlen($string) + 12));
+        $this->comment('*     '.$string.'     *');
+        $this->comment(str_repeat('*', strlen($string) + 12));
+
+        $this->output->writeln('');
+    }
+
+    /**
      * Format input to textual table.
      *
      * @param array                                         $headers
