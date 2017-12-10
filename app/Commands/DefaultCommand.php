@@ -12,7 +12,7 @@ class DefaultCommand extends Command
      *
      * @var string
      */
-    protected $name = 'default';
+    protected $name = 'software:install';
 
     /**
      * The description of the command.
@@ -72,6 +72,7 @@ class DefaultCommand extends Command
         $moduleKey = $this->anticipate('Choose a program', $modulesAutocomplete);
 
         $moduleInstance = $modules->get(strtolower($moduleKey));
+        $moduleInstance->install();
         $this->info($moduleInstance->isInstalled() ? 'installed' : 'not found');
         $this->info($moduleInstance->getVersion());
     }
