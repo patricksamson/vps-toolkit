@@ -28,6 +28,6 @@ class PostgreSQL extends AbstractAptGetSoftware
 
     public function getVersion(): string
     {
-        return ''.`psql -v`;
+        return ''.`psql --version`;
     }
 }
