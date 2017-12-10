@@ -2,9 +2,10 @@
 
 namespace App\Commands;
 
-use LaravelZero\Framework\Commands\AbstractCommand;
+use Illuminate\Support\Collection;
+use LaravelZero\Framework\Commands\Command;
 
-class DefaultCommand extends AbstractCommand
+class DefaultCommand extends Command
 {
     /**
      * The name of the command.
@@ -34,14 +35,44 @@ class DefaultCommand extends AbstractCommand
         $this->warn('Warn');
         $this->alert('Alert');
 
-        $this->confirm('Confirm?');
-        $this->ask('Ask Question?');
+        //$this->confirm('Confirm?');
+        //$this->ask('Ask Question?');
 
         //$shell = $this->getContainer()->make(\App\Modules\Utils\ShellCommand::class);
         //$shell->execute('ls -la');
 
         $nginx = $this->getContainer()->make(\App\Modules\Software\Nginx::class);
         //$nginx = new \App\Modules\Software\Nginx();
-        $nginx->test();
+
+        $this->info($nginx->getVersion());
+
+        //$modules = config('modules');
+        $modules = new Collection();
+        foreach (config('modules') as $moduleClass) {
+            $instance = $this->getContainer()->make($moduleClass);
+            $modules->put($instance->getKey(), $instance);
+        }
+
+        $headers = ['Name', 'Description', 'Installed?'];
+        $modulesAutocomplete = [];
+        foreach ($modules as $module) {
+            $modulesAutocomplete[] = $module->getName();
+            $modulesAutocomplete[] = strtolower($module->getName());
+        }
+        $rows = $modules->map(function ($module) {
+            return [
+                'name' => $module->getName(),
+                'description' => $module->getDescription() ?? '',
+                'installed' => $module->isInstalled() ? 'Yes' : 'No',
+            ];
+        });
+
+        $this->table($headers, $rows);
+
+        $moduleKey = $this->anticipate('Choose a program', $modulesAutocomplete);
+
+        $moduleInstance = $modules->get(strtolower($moduleKey));
+        $this->info($moduleInstance->isInstalled() ? 'installed' : 'not found');
+        $this->info($moduleInstance->getVersion());
     }
 }
