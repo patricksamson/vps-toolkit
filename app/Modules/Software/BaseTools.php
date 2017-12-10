@@ -31,8 +31,11 @@ class BaseTools extends AbstractAptGetSoftware
         parent::install();
 
         // Remove apache2 and MySQL
-        `sudo apt-get --purge remove mysql-server mysql-client`;
-        `sudo apt-get --purge remove apache2`;
+        `sudo service mysql stop`;
+        `sudo apt-get -y --purge remove mysql-server mysql-client`;
+        `sudo apt-get -y --purge remove apache2`;
+        `sudo apt-get -y --purge autoremove`;
+        `sudo apt-get autoclean`;
     }
 
     public function getVersion(): string
