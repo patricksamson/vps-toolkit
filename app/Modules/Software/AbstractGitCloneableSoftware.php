@@ -45,7 +45,7 @@ abstract class AbstractGitCloneableSoftware extends AbstractBaseSoftware impleme
 
     public function remove()
     {
-        `rm -rf {$installPath}`;
+        `rm -rf {$this->installPath}`;
     }
 
     abstract public function getVersion(): string;
