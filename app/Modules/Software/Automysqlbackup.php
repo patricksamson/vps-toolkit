@@ -15,6 +15,6 @@ class Automysqlbackup extends AbstractAptGetSoftware
 
     public function getVersion(): string
     {
-        return `unknown`;
+        return 'unknown';
     }
 }
