@@ -4,7 +4,7 @@ namespace App\Modules\Concerns;
 
 trait ExecutesShellCommands
 {
-    private function execute()
+    private function execute($command)
     {
         $this->printCommand($command);
 

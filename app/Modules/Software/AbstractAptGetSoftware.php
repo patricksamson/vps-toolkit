@@ -27,7 +27,7 @@ abstract class AbstractAptGetSoftware extends AbstractBaseSoftware implements In
 
     /**
      * Once the software is installed, what is it's executable?
-     * EX : nginx, mysql, php...
+     * Ex : nginx, mysql, php...
      *
      * @var string
      */

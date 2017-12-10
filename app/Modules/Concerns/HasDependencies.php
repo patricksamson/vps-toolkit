@@ -6,6 +6,12 @@ use App\Modules\Contracts\Installable;
 
 trait HasDependencies
 {
+    /**
+     * A list of this software's dependencies.
+     * Must be Installable classes.
+     *
+     * @var array
+     */
     protected $dependencies = [];
 
     public function installDependencies()

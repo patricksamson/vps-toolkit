@@ -5,6 +5,7 @@ return [
         'Automysqlbackup' => \App\Modules\Software\Automysqlbackup::class,
         'BaseTools' => \App\Modules\Software\BaseTools::class,
         'Certbot' => \App\Modules\Software\Certbot::class,
+        'Composer' => \App\Modules\Software\Composer::class,
         'MariaDB' => \App\Modules\Software\MariaDB::class,
         'Nginx' => \App\Modules\Software\Nginx::class,
         'NodeJS' => \App\Modules\Software\Nodejs::class,
