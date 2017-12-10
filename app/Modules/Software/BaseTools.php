@@ -26,6 +26,15 @@ class BaseTools extends AbstractAptGetSoftware
         'wget',
     ];
 
+    public function install()
+    {
+        parent::install();
+
+        // Remove apache2 and MySQL
+        `sudo apt-get --purge remove mysql-client-core-5.7`;
+        `sudo apt-get --purge remove apache2`;
+    }
+
     public function getVersion(): string
     {
         // TODO : Iterate over multiple executables
@@ -35,6 +44,6 @@ class BaseTools extends AbstractAptGetSoftware
     public function isInstalled(): bool
     {
         // TODO : Iterate over multiple executables
-        return !empty(`which supervisor`);
+        return !empty(`which htop`);
     }
 }
