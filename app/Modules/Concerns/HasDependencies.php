@@ -12,7 +12,7 @@ trait HasDependencies
      *
      * @var array
      */
-    protected $dependencies = [];
+    //protected $dependencies = [];
 
     public function installDependencies()
     {
