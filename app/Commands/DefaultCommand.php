@@ -74,6 +74,6 @@ class DefaultCommand extends Command
         $moduleInstance = $modules->get(strtolower($moduleKey));
         $moduleInstance->install();
         $this->info($moduleInstance->isInstalled() ? 'installed' : 'not found');
-        $this->info($moduleInstance->getVersion());
+        $this->line($moduleInstance->getVersion());
     }
 }

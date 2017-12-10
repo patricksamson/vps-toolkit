@@ -57,6 +57,7 @@ abstract class AbstractAptGetSoftware extends AbstractBaseSoftware implements In
             $found = `grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep {$this->repository}`;
 
             if (empty($found)) {
+                $this->info('Adding apt repository...');
                 $output = `sudo add-apt-repository -y ppa:{$this->repository}`;
             }
         }
@@ -64,11 +65,13 @@ abstract class AbstractAptGetSoftware extends AbstractBaseSoftware implements In
 
     private function refreshPackages()
     {
+        $this->info('Refreshing packages...');
         $output = `sudo apt-get update`;
     }
 
     private function executeInstall()
     {
+        $this->info("Installing {$this->name} packages...");
         $packagesList = implode(' ', $this->packages);
         $output = `sudo apt-get -y install $packagesList`;
     }
