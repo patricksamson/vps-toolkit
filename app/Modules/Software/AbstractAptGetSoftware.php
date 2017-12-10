@@ -9,8 +9,28 @@ abstract class AbstractAptGetSoftware extends AbstractBaseSoftware implements In
 {
     use HasDependencies;
 
+    /**
+     * The PPA Repository to add.
+     * add-apt-repository ppa:{repository}.
+     *
+     * @var string
+     */
     protected $repository;
+
+    /**
+     * The packages to install.
+     * apt-get install {packages}.
+     *
+     * @var array
+     */
     protected $packages = [];
+
+    /**
+     * Once the software is installed, what is it's executable?
+     * EX : nginx, mysql, php...
+     *
+     * @var string
+     */
     protected $executable;
 
     public function install()

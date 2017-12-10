@@ -28,11 +28,13 @@ class BaseTools extends AbstractAptGetSoftware
 
     public function getVersion(): string
     {
+        // TODO : Iterate over multiple executables
         return 'unknown';
     }
 
     public function isInstalled(): bool
     {
+        // TODO : Iterate over multiple executables
         return !empty(`which supervisor`);
     }
 }

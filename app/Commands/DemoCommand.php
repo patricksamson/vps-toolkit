@@ -2,9 +2,9 @@
 
 namespace App\Commands;
 
-use LaravelZero\Framework\Commands\AbstractCommand;
+use LaravelZero\Framework\Commands\Command;
 
-class DemoCommand extends AbstractCommand
+class DemoCommand extends Command
 {
     /**
      * The name of the command.
