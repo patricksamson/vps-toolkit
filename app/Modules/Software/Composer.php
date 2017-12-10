@@ -23,7 +23,7 @@ class Composer extends AbstractBaseSoftware implements Installable
     public function install()
     {
         $this->execute('curl -sS https://getcomposer.org/installer | php');
-        $this->execute("sudo mv composer.phar ${$this->installPath}");
+        $this->execute("sudo mv composer.phar {$this->installPath}");
     }
 
     public function remove()
