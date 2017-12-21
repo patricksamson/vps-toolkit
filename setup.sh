@@ -48,8 +48,6 @@ echo -e $YELLOW'24. '$ENDCOLOR'MariaDB - Install'
 echo -e $YELLOW'25. '$ENDCOLOR'MariaDB - Uninstall'
 echo -e $YELLOW'30. '$ENDCOLOR'PHP - Install'
 echo -e $YELLOW'31. '$ENDCOLOR'PHP - Uninstall'
-echo -e $YELLOW'32. '$ENDCOLOR'HHVM - Install'
-echo -e $YELLOW'33. '$ENDCOLOR'HHVM - Uninstall'
 echo -e $YELLOW'34. '$ENDCOLOR'Composer - Install'
 echo -e $YELLOW'35. '$ENDCOLOR'Composer - Uninstall'
 echo -e $YELLOW'36. '$ENDCOLOR'Node.js - Install'
@@ -129,12 +127,6 @@ case $option in
         ;;
     31)
         sudo ./php/php-uninstaller.sh
-        ;;
-    32)
-        sudo ./php/hhvm-installer.sh
-        ;;
-    33)
-        sudo ./php/hhvm-uninstaller.sh
         ;;
     34)
         sudo ./php/composer-installer.sh
