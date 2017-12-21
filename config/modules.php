@@ -12,5 +12,6 @@ return [
         'PHP' => \App\Modules\Software\PHP::class,
         'PostgreSQL' => \App\Modules\Software\PostgreSQL::class,
         'Transmission' => \App\Modules\Software\Transmission::class,
+        'Test' => \App\Modules\Software\Test::class,
     ],
 ];

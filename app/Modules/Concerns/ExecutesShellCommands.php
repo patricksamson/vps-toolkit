@@ -9,6 +9,7 @@ trait ExecutesShellCommands
         $this->printCommand($command);
 
         system($command);
+        //shell_exec($command);
     }
 
     public function printCommand($string, $verbosity = null)

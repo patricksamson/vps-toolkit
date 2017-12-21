@@ -12,7 +12,7 @@ class Certbot extends AbstractAptGetSoftware
     protected $executable = 'certbot';
 
     protected $packages = [
-        '',
+        'python-certbot-nginx ',
     ];
 
     public function getVersion(): string
