@@ -19,13 +19,15 @@ BGCYAN='\033[0;46m'
 # Reset colors
 ENDCOLOR='\033[0m'
 
+#for (( i = 30; i < 50; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done
+
 print_header() {
     clear
     echo
     echo -e $RED
-    echo -e "_    _   _ _  _ ____ ____ ____ _  _ ____ ____"
-    echo -e "|     \_/  |_/  |___ | __ |___ |\ | |___ [__ "
-    echo -e "|___   |   | \_ |___ |__] |___ | \| |___ ___]"
+    echo -e "    _    _   _ _  _ ____ ____ ____ _  _ ____ ____"
+    echo -e "    |     \_/  |_/  |___ | __ |___ |\ | |___ [__ "
+    echo -e "    |___   |   | \_ |___ |__] |___ | \| |___ ___]"
     echo -e $CYAN
     echo -e " __     ______  ____    _____           _ _    _ _   "
     echo -e " \ \   / /  _ \/ ___|  |_   _|__   ___ | | | _(_) |_ "
@@ -33,8 +35,6 @@ print_header() {
     echo -e "   \ V / |  __/ ___) |   | | (_) | (_) | |   <| | |_ "
     echo -e "    \_/  |_|   |____/    |_|\___/ \___/|_|_|\_\_|\__|"
     echo
-
-    #for (( i = 30; i < 50; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done
 }
 
 # Print an error message.
@@ -52,6 +52,7 @@ print_error() {
 #
 # string    The success message
 print_success() {
+    echo
     echo -e $GREEN$1$ENDCOLOR
 }
 
@@ -61,12 +62,15 @@ print_success() {
 #
 # string    The step message
 print_step_comment() {
+    echo
     echo -e $YELLOW'--->'$1$ENDCOLOR
 }
 
 # Pause the program execution until the user presses on Enter.
 pause_press_enter() {
-    pause 'Press [Enter] key to continue...'
+    echo
+    echo -en $BGBLUE'Press [Enter] key to continue... '$ENDCOLOR
+    read -p "$*"
 }
 
 # Ask a simple yes/no question to the user.
@@ -150,4 +154,13 @@ ask_password() {
     echo # newline
 
     eval "$1=$reply"
+}
+
+
+ask_proceed_installation() {
+    if ! ask_yes_no "This will install $1 on your system. Do you want to continue?" N; then
+        print_error "So you chickened out. May be you will try again later."
+        pause_press_enter
+        show_main_menu
+    fi
 }
