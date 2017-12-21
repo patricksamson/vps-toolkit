@@ -78,7 +78,7 @@ echo
 sleep 1
 
 echo -e $YELLOW"--->Installing "$SOFTNAME"..."$ENDCOLOR
-sudo apt-get -y install php7.0-cli php7.0-fpm php7.0-common php7.0-mbstring php7.0-xml php7.0-mcrypt php7.0-curl php7.0-mysql php7.0-pgsql php7.0-sqlite3 php7.0-gd php7.0-gmp php7.0-zip
+sudo apt-get -y install php7.2-cli php7.2-common php7.2-curl php7.2-dom php7.2-fpm php7.2-gd php7.2-gmp php7.2-mcrypt php7.2-mbstring php7.2-mysql php7.2-opcache php7.2-pgsql php7.2-sqlite3 php7.2-readline php7.2-xml php7.2-zip
 
 echo
 sleep 1
