@@ -1,15 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script Name: Lykegenes VPS Toolkit
 # Author: Patrick Samson
 # License: MIT License (refer to README.md for more details)
 #
 
 # DO NOT EDIT ANYTHING UNLESS YOU KNOW WHAT YOU ARE DOING.
-YELLOW='\e[93m'
-RED='\e[91m'
-ENDCOLOR='\033[0m'
-CYAN='\e[96m'
-GREEN='\e[92m'
+
+source helpers/output.sh
+source helpers/apt-get.sh
+
 SCRIPTPATH=$(pwd)
 
 sudo chmod -R 775 * >/dev/null 2>&1
@@ -26,20 +25,8 @@ if [ "$EUID" -ne 0 ]
   exit 0
 fi
 
-clear
-echo
-echo -e $RED
-echo -e "_    _   _ _  _ ____ ____ ____ _  _ ____ ____"
-echo -e "|     \_/  |_/  |___ | __ |___ |\ | |___ [__ "
-echo -e "|___   |   | \_ |___ |__] |___ | \| |___ ___]"
-echo -e $CYAN
-echo -e " __     ______  ____    _____           _ _    _ _   "
-echo -e " \ \   / /  _ \/ ___|  |_   _|__   ___ | | | _(_) |_ "
-echo -e "  \ \ / /| |_) \___ \    | |/ _ \ / _ \| | |/ / | __|"
-echo -e "   \ V / |  __/ ___) |   | | (_) | (_) | |   <| | |_ "
-echo -e "    \_/  |_|   |____/    |_|\___/ \___/|_|_|\_\_|\__|"
-echo
-echo -e $GREEN'Lykegenes '$SOFTNAME' Installer Script'$ENDCOLOR
+print_header
+
 echo
 echo -e 'NOTE: At this point, this script has been confirmed to work only on Ubuntu variants.'
 echo
@@ -184,7 +171,6 @@ case $option in
         echo
         echo -e $YELLOW'Thank you for using the Lykegenes VPS ToolKit!'$ENDCOLOR
         echo
-        sleep 1
         ;;
     *)
         echo -e $RED'Invalid Option'$ENDCOLOR
