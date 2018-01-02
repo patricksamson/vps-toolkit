@@ -60,4 +60,5 @@ apt-get-remove() {
     # echo ${str# } # a string with all the parameters concatenated
 
     sudo apt-get -y remove $str
+    sudo apt-get -y autoremove
 }
