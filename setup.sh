@@ -47,6 +47,7 @@ show_main_menu() {
     echo -e $YELLOW'23. '$ENDCOLOR'MySQL - Uninstall'
     echo -e $YELLOW'24. '$ENDCOLOR'MariaDB - Install'
     echo -e $YELLOW'25. '$ENDCOLOR'MariaDB - Uninstall'
+    echo -e $YELLOW'28. '$ENDCOLOR'Automysqlbackup - Install'
     echo -e $YELLOW'30. '$ENDCOLOR'PHP - Install'
     echo -e $YELLOW'31. '$ENDCOLOR'PHP - Uninstall'
     echo -e $YELLOW'34. '$ENDCOLOR'Composer - Install'
@@ -57,8 +58,6 @@ show_main_menu() {
     echo -e $YELLOW'61. '$ENDCOLOR'Transmission Web UI - Uninstall'
     echo -e $YELLOW'62. '$ENDCOLOR'Invoice Ninja - Install'
     echo -e $YELLOW'63. '$ENDCOLOR'Invoice Ninja - Update'
-    echo -e $YELLOW'80. '$ENDCOLOR'PostgreSQL - Backup'
-    echo -e $YELLOW'81. '$ENDCOLOR'MySQL - Backup'
     echo -e $YELLOW'98. '$ENDCOLOR'Tests'
     echo -e $YELLOW'99. '$ENDCOLOR'Exit'
 
@@ -124,6 +123,9 @@ show_main_menu() {
         25)
             sudo ./databases/mariadb-uninstaller.sh
             ;;
+        28)
+            sudo ./databases/automysqlbackup-installer.sh
+            ;;
         30)
             source ./php/php-installer.sh
             ;;
@@ -153,12 +155,6 @@ show_main_menu() {
             ;;
         63)
             sudo ./apps/invoice-ninja-updater.sh
-            ;;
-        80)
-            sudo ./databases/pgsql-backup.sh
-            ;;
-        81)
-            sudo ./databases/mysql-backup.sh
             ;;
         98)
             source ./test.sh
