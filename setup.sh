@@ -38,9 +38,7 @@ show_main_menu() {
     echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL or MariaDB User'
     echo -e $YELLOW'10. '$ENDCOLOR'Nginx - Install'
     echo -e $YELLOW'11. '$ENDCOLOR'Nginx - Uninstall'
-    echo -e $YELLOW'12. '$ENDCOLOR'Lets Encrypt Shell Client - Install'
-    echo -e $YELLOW'13. '$ENDCOLOR'Lets Encrypt Shell Client - Create SSL Certificate'
-    echo -e $YELLOW'14. '$ENDCOLOR'Lets Encrypt Shell Client - Renew SSL Certificates'
+    echo -e $YELLOW'12. '$ENDCOLOR'Certbot - Install'
     echo -e $YELLOW'20. '$ENDCOLOR'PostgreSQL - Install'
     echo -e $YELLOW'21. '$ENDCOLOR'PostgreSQL - Uninstall'
     echo -e $YELLOW'22. '$ENDCOLOR'MySQL - Install'
@@ -97,13 +95,7 @@ show_main_menu() {
             sudo ./webservers/nginx-uninstaller.sh
             ;;
         12)
-            sudo ./webservers/letsencrypt-installer.sh
-            ;;
-        13)
-            sudo ./webservers/letsencrypt-create.sh
-            ;;
-        14)
-            sudo ./webservers/letsencrypt-renew.sh
+            sudo ./webservers/certbot-installer.sh
             ;;
         20)
             sudo ./databases/pgsql-installer.sh
