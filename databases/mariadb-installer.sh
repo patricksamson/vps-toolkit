@@ -5,9 +5,9 @@
 
 print_header
 
-ask_proceed_installation "PHP"
+ask_proceed_installation "MariaDB"
 
-if ! check_ppa_exists ondrej/php; then
+if ! check_ppa_exists mariadb; then
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
     sudo add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu '$(lsb_release -sc)' main'
 fi
