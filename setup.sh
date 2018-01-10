@@ -8,6 +8,7 @@
 
 source helpers/output.sh
 source helpers/apt-get.sh
+source helpers/filesystem.sh
 
 SCRIPTPATH=$(pwd)
 

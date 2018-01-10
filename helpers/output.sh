@@ -164,3 +164,19 @@ ask_proceed_installation() {
         show_main_menu
     fi
 }
+
+
+# Determine if the specified program is installed, and found in the PATH.
+#
+# e.g.: $(program_is_installed "nginx")
+#
+# string    The program's command name
+program_is_installed() {
+    hash $1 2>/dev/null || {
+        # It's not installed
+        return 1;
+    }
+
+    # We found it!
+    return 0;
+}

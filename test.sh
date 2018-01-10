@@ -17,5 +17,13 @@ return_var=''
 ask_password return_var "Enter your password"
 echo $return_var
 
+
+if program_is_installed "nginx"; then
+    echo "Nginx is installed"
+else
+    echo "Nginx is missing"
+fi
+
+
 pause_press_enter
 show_main_menu
