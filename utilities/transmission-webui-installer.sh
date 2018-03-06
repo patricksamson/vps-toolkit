@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Script Name: Lykegenes VPS Toolkit
 # Author: Patrick Samson
 # License: MIT License (refer to README.md for more details)
 #

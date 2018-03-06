@@ -3,7 +3,6 @@
 # License: MIT License (refer to README.md for more details)
 #
 
-
 print_header
 
 ask_proceed_installation "Base Tools"
