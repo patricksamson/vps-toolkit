@@ -68,7 +68,7 @@ show_main_menu() {
             echo
             echo -e $YELLOW'--->Checking for updates...'$ENDCOLOR
             cd $SCRIPTPATH
-            git fetch origin master
+            git fetch origin bash-rewrite
             git reset --hard FETCH_HEAD
             git clean -df
             echo
@@ -81,7 +81,7 @@ show_main_menu() {
             sudo ./optimize-server.sh
             ;;
         2 | 02)
-            sudo ./utilities/base-tools-installer.sh
+            source ./utilities/base-tools-installer.sh
             ;;
         3| 03)
             sudo ./users/create-user.sh
@@ -90,13 +90,13 @@ show_main_menu() {
             sudo ./users/create-mysql-user.sh
             ;;
         10)
-            sudo ./webservers/nginx-installer.sh
+            source ./webservers/nginx-installer.sh
             ;;
         11)
             sudo ./webservers/nginx-uninstaller.sh
             ;;
         12)
-            sudo ./webservers/certbot-installer.sh
+            source ./webservers/certbot-installer.sh
             ;;
         20)
             sudo ./databases/pgsql-installer.sh
@@ -117,7 +117,7 @@ show_main_menu() {
             sudo ./databases/mariadb-uninstaller.sh
             ;;
         28)
-            sudo ./databases/automysqlbackup-installer.sh
+            source ./databases/automysqlbackup-installer.sh
             ;;
         30)
             source ./php/php-installer.sh
@@ -126,7 +126,7 @@ show_main_menu() {
             sudo ./php/php-uninstaller.sh
             ;;
         34)
-            sudo ./php/composer-installer.sh
+            source ./php/composer-installer.sh
             ;;
         35)
             sudo ./php/composer-uninstaller.sh
@@ -138,7 +138,7 @@ show_main_menu() {
             sudo ./node/node-uninstaller.sh
             ;;
         60)
-            sudo ./utilities/transmission-webui-installer.sh
+            source ./utilities/transmission-webui-installer.sh
             ;;
         61)
             sudo ./utilities/transmission-webui-uninstaller.sh
