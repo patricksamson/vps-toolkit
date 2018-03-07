@@ -23,7 +23,7 @@ check_ppa_exists() {
     local grepout
     grepout=$(grep -s ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep $1)
 
-    if [ -z "$reply" ]; then
+    if [ -z "$grepout" ]; then
         return 0 ;
     else
         return 1 ;
