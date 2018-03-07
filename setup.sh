@@ -128,7 +128,7 @@ show_main_menu() {
             sudo ./php/composer-uninstaller.sh
             ;;
         36)
-            sudo ./node/node-installer.sh
+            source ./node/node-installer.sh
             ;;
         37)
             sudo ./node/node-uninstaller.sh

@@ -22,15 +22,11 @@ apt-get-install \
         iotop \
         nano \
         openssl \
-        python3-dev \
-        python3-pip \
         software-properties-common \
         sudo \
         supervisor \
         unzip \
         wget
-
-sudo pip3 install thefuck
 
 print_success "All done."
 git --version

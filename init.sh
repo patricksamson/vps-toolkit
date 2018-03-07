@@ -43,11 +43,17 @@ sudo echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/NOPASSWD
 print_step_comment "Installing ZSH shell environment..."
 apt-get-install zsh
 
-chsh -s `which zsh` # In GCloud : sudo chsh someusername -s $(which zsh)
+chsh -s `which zsh`
+# In GCloud, only this works : sudo chsh someusername -s $(which zsh)
 
 # Install custom Prezto theme
 git clone --recursive https://github.com/lykegenes/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+# Open a ZSH shell
+zsh
 setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
+
+exit
