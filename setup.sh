@@ -33,7 +33,6 @@ show_main_menu() {
     echo -e 'NOTE: At this point, this script has been confirmed to work only on Ubuntu variants.'
     echo
     echo -e $YELLOW'00. '$ENDCOLOR'Check and Update Lykegenes VPS ToolKit'
-    echo -e $YELLOW'01. '$ENDCOLOR'Optimize server'
     echo -e $YELLOW'02. '$ENDCOLOR'Install the Base Tool and Utilities'
     echo -e $YELLOW'03. '$ENDCOLOR'Configure a new User'
     echo -e $YELLOW'04. '$ENDCOLOR'Create a MySQL or MariaDB User'
@@ -76,9 +75,6 @@ show_main_menu() {
             cd $SCRIPTPATH
             sudo bash ./setup.sh
             exit 0
-            ;;
-        1 | 01)
-            sudo ./optimize-server.sh
             ;;
         2 | 02)
             source ./utilities/base-tools-installer.sh
