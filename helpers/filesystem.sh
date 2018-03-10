@@ -42,7 +42,7 @@ create_directory() {
 # string    The username and/or usergroup names
 # string    The file or directory
 set_file_owner() {
-    sudo chown $1 $2 || { print_error "Failed to set owner of file ${2}"; exit 1; }
+    sudo chown -R $1 $2 || { print_error "Failed to set owner of file ${2}"; exit 1; }
 }
 
 
