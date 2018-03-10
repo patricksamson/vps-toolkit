@@ -26,7 +26,7 @@ print_step_comment "Configuring user..."
 if ask_yes_no "Do you want to create a SSH key for this user?"; then
     EMAIL=''
     ask_question EMAIL "Enter your email address :"
-    udo mkdir /home/$UNAME/.ssh
+    sudo mkdir /home/$UNAME/.ssh
     ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f /home/$UNAME/.ssh/id_rsa
     eval "$(ssh-agent -s)"
     ssh-add /home/$UNAME/.ssh/id_rsa
