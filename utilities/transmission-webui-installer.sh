@@ -8,6 +8,7 @@ print_header
 
 ask_proceed_installation "Transmission"
 
+CONFIG_PATH="/etc/transmission-daemon"
 DOWNLOADS_PATH="/var/lib/transmission-daemon"
 
 UNAME=''
@@ -36,19 +37,26 @@ create_directory ${DOWNLOADS_PATH}/completed
 create_directory ${DOWNLOADS_PATH}/incomplete
 
 
+# This is a temporary fix for v2.93 not starting up. It might break if they fix it...
+print_step_comment "Copying service file..."
+copy_config_file $SCRIPTPATH/utilities/transmission-daemon.service /lib/systemd/system/transmission-daemon.service
+systemctl daemon-reload # Reload Systemctl configs
+
+
 print_step_comment "Copying settings file..."
-CONFIG_FILE="/etc/transmission-daemon/settings.json"
+CONFIG_FILE="${CONFIG_PATH}/settings.json"
 copy_config_file $CONFIG_FILE $CONFIG_FILE.default # Keep the default or previous config file
 copy_config_file $SCRIPTPATH/utilities/transmission-initial-settings.json $CONFIG_FILE
 
 
 print_step_comment "Setting permissions..."
 sudo usermod -aG debian-transmission $UNAME  || { print_error "Adding debian-transmission group to user failed."; exit 1; }
-sudo chown :debian-transmission $CONFIG_FILE  || { print_error "Chown settings.json failed"; exit 1; }
-sudo chmod 775 $CONFIG_FILE
-sudo chown -R :debian-transmission $DOWNLOADS_PATH
-sudo chmod -R 775 $DOWNLOADS_PATH
-sudo chmod g+s $DOWNLOADS_PATH
+
+set_file_owner debian-transmission:debian-transmission $CONFIG_PATH
+set_file_permission 775 $CONFIG_PATH
+
+set_file_owner :debian-transmission $DOWNLOADS_PATH
+set_file_permission 775 $DOWNLOADS_PATH
 
 
 print_step_comment "Setting up Transmission User, WebUI User and Password..."
@@ -69,7 +77,7 @@ if program_is_installed "nginx"; then
         ask_question TRANS_SERVER "Set a domain name for the Nginx proxy :"
 
         print_step_comment "Configuring Nginx proxy for Transmission..."
-        sudo cp -f $SCRIPTPATH/utilities/transmission-nginx-proxy /etc/nginx/sites-available/transmission-proxy
+        copy_config_file $SCRIPTPATH/utilities/transmission-nginx-proxy /etc/nginx/sites-available/transmission-proxy
         sudo ln -f -s /etc/nginx/sites-available/transmission-proxy /etc/nginx/sites-enabled/transmission-proxy #symlink
         replace_in_config TRANSMISSION_SERVER_NAME $TRANS_SERVER /etc/nginx/sites-available/transmission-proxy # change server name to listen to
 
@@ -88,7 +96,7 @@ if program_is_installed "nginx"; then
         ask_question TRANS_SERVER "Set a domain name for the Nginx Downloads :"
 
         print_step_comment "Configuring Nginx for HTTP downloads..."
-        sudo cp -f $SCRIPTPATH/utilities/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
+        copy_config_file $SCRIPTPATH/utilities/transmission-nginx-downloads /etc/nginx/sites-available/transmission-downloads
         sudo ln -f -s /etc/nginx/sites-available/transmission-downloads /etc/nginx/sites-enabled/transmission-downloads #symlink
         replace_in_config TRANSMISSION_SERVER_NAME $TRANS_SERVER /etc/nginx/sites-available/transmission-downloads # change server name to listen to
         echo "${TUNAME}:$(openssl passwd -apr1 ${TPASS})" >> /etc/nginx/conf.d/transmission-downloads.htpasswd # append at end of file
