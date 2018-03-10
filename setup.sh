@@ -80,7 +80,7 @@ show_main_menu() {
             source ./utilities/base-tools-installer.sh
             ;;
         3| 03)
-            sudo ./users/create-user.sh
+            source ./users/create-user.sh
             ;;
         4| 04)
             sudo ./users/create-mysql-user.sh
