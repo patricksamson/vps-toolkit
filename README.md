@@ -12,6 +12,7 @@ apt-get update
 apt-get install sudo git
 git clone https://github.com/Lykegenes/vps-toolkit -b bash-rewrite --single-branch --depth 1
 cd ./vps-toolkit
+sudo bash ./init.sh
 sudo bash ./setup.sh
 ```
 And follow the instructions on the screen.

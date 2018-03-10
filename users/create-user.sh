@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+# Script Name: Lykegenes VPS Toolkit
+# Author: Patrick Samson
+# License: MIT License (refer to README.md for more details)
+#
+
 print_header
 
 ask_proceed_installation "Create a new user"
@@ -6,7 +12,7 @@ ask_proceed_installation "Create a new user"
 print_step_comment "Setting up username and password..."
 UNAME=''
 ask_question UNAME "Set a Username :"
-sudo useradd $UNAME --create-home --shell /bin/bash || { print_error "Creating user failed."; exit 1; }
+sudo useradd $UNAME --create-home --shell /bin/zsh || { print_error "Creating user failed."; exit 1; }
 
 
 UPASS=''
@@ -36,6 +42,11 @@ fi
 
 if ask_yes_no "Add this user to 'www-data' group?"; then
     sudo usermod -aG www-data $UNAME
+fi
+
+
+if ask_yes_no "Add this user to 'debian-transmission' group?"; then
+    sudo usermod -aG debian-transmission $UNAME
 fi
 
 
