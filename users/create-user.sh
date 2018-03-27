@@ -32,9 +32,23 @@ if ask_yes_no "Do you want to create a SSH key for this user?"; then
     ssh-add /home/$UNAME/.ssh/id_rsa
     cat /home/$UNAME/.ssh/id_rsa.pub
     sudo chown -R $UNAME:$UNAME /home/$UNAME/.ssh
+
+    print_success "You can enable passwordless SSH login on your machine by running this command 'ssh-copy-id user@hostname'"
 fi
 
 
+print_step_comment "Seting up the user's ZSH shell..."
+# We must execute this in a ZSH shell
+zsh $SCRIPTPATH/users/init-zsh.sh
+
+
+print_step_comment "Installing VPS Toolkit"
+copy_config_file $SCRIPTPATH /home/$UNAME/
+set_file_owner $UNAME:$UNAME /home/$UNAME/vps-toolkit
+set_file_permission 775 /home/$UNAME/vps-toolkit
+
+
+print_step_comment "Adding user to desired groups..."
 if ask_yes_no "Add this user to Sudoers?"; then
     sudo usermod -aG sudo $UNAME
 fi
