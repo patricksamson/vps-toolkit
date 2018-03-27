@@ -4,9 +4,6 @@
 # License: MIT License (refer to README.md for more details)
 #
 
-chsh -s `which zsh`
-# In GCloud, only this works : sudo chsh someusername -s $(which zsh)
-
 # Install custom Prezto theme
 git clone --recursive https://github.com/lykegenes/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 

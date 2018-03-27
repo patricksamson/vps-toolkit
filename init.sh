@@ -11,10 +11,6 @@ SCRIPTPATH=$(pwd)
 
 sudo chmod -R 775 * >/dev/null 2>&1
 
-function pause(){
-   read -p "$*"
-}
-
 if [ "$EUID" -ne 0 ]
   then
   echo
@@ -44,8 +40,10 @@ sudo echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/NOPASSWD
 print_step_comment "Installing ZSH shell environment..."
 apt-get-install zsh
 
-# We must execute this in a ZSH shell
-zsh users/init-zsh.sh
+# Change default shell for current user
+sudo chsh $(whoami) -s $(which zsh)
+
+zsh $SCRIPTPATH/users/init-zsh.sh
 
 
 print_success "Done!"
