@@ -16,6 +16,9 @@ apt-get-update
 
 apt-get-install python-certbot-nginx
 
+print_step_comment "Adding crontab entry for certificate renewals."
+(crontab -l | echo "23 3,18 * * * root certbot renew --quiet") | crontab -
+
 print_success "All done."
 certbot --version
 echo
