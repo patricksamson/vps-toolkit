@@ -16,19 +16,13 @@ apt-get-update
 
 apt-get-install nginx
 
-echo -e $YELLOW"--->Creating SSL Certificates folder..."$ENDCOLOR
-sudo mkdir /certs
-sudo chown -R :www-data /certs
-echo -e $CYAN'/certs/'$ENDCOLOR ' - Folder created; put your SSL Certs in there'
-
-echo -e $YELLOW"--->Generating Diffie-Hellman keys; this will take some time..."$ENDCOLOR
-sudo rm -r /certs/dhparams.pem
-sudo openssl dhparam -out /certs/dhparams.pem 2048
-sudo chown -R :www-data /certs
-
 echo -e $YELLOW"--->Copying Configuration files..."$ENDCOLOR
 sudo mkdir -p /etc/nginx/vps-toolkit
 sudo cp -R -f $SCRIPTPATH/webservers/nginx-conf/. /etc/nginx/vps-toolkit
+
+echo -e $YELLOW"--->Generating Diffie-Hellman keys; this will take some time..."$ENDCOLOR
+sudo rm -r /etc/nginx/vps-toolkit/dhparams.pem
+sudo openssl dhparam 2048 -out /etc/nginx/vps-toolkit/dhparams.pem
 
 print_success "All done."
 nginx -v
