@@ -15,6 +15,7 @@ fi
 apt-get-update
 
 apt-get-install \
+        bmon \
         curl \
         fail2ban \
         git \
