@@ -9,7 +9,7 @@ print_header
 ask_proceed_installation "Nginx"
 
 if ! check_ppa_exists nginx; then
-    sudo add-apt-repository -y ppa:nginx/development
+    sudo add-apt-repository -y ppa:nginx/stable
 fi
 
 apt-get-update
