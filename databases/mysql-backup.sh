@@ -73,7 +73,7 @@ fi
 echo
 sleep 1
 
-echo -e $YELLOW"--->Creating Beckup directory..."$ENDCOLOR
+echo -e $YELLOW"--->Creating Backup directory..."$ENDCOLOR
 mkdir -p $OUTPUTDIR
 echo -e $CYAN"Backups will be placed in $GREEN$OUTPUTDIR"$ENDCOLOR
 
