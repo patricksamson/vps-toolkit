@@ -10,7 +10,7 @@ Clone repository on any Ubuntu based distro and execute the `setup.sh` bash scri
 ```shell
 apt-get update
 apt-get install sudo git
-git clone https://github.com/Lykegenes/vps-toolkit -b bash-rewrite --single-branch --depth 1 /opt/vps-toolkit
+git clone https://github.com/Lykegenes/vps-toolkit -b master --single-branch --depth 1 /opt/vps-toolkit
 sudo bash /opt/vps-toolkit/init.sh
 sudo bash /opt/vps-toolkit/setup.sh
 ```

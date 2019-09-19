@@ -12,6 +12,7 @@ SCRIPTPATH=$(dirname "$0")
 
 source $SCRIPTPATH'/helpers/output.sh'
 source $SCRIPTPATH'/helpers/apt-get.sh'
+source $SCRIPTPATH'/helpers/filesystem.sh'
 
 sudo chmod -R 775 * >/dev/null 2>&1
 
