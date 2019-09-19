@@ -4,17 +4,21 @@
 # License: MIT License (refer to README.md for more details)
 #
 
-source helpers/output.sh
-source helpers/apt-get.sh
 
-SCRIPTPATH=$(pwd)
+# Determine the base path of this script.
+# echo "The script you are running has basename `basename "$0"`, dirname `dirname "$0"`"
+# echo "The present working directory is `pwd`"
+SCRIPTPATH=$(dirname "$0")
+
+source $SCRIPTPATH'/helpers/output.sh'
+source $SCRIPTPATH'/helpers/apt-get.sh'
 
 sudo chmod -R 775 * >/dev/null 2>&1
 
 if [ "$EUID" -ne 0 ]
   then
   echo
-  echo -e $RED'Please run as root using the command: '$ENDCOLOR'sudo ./setup.sh'
+  echo -e $RED'Please run as root using the command: '$ENDCOLOR'sudo /opt/vps-toolkit/setup.sh'
   echo
   exit 0
 fi

@@ -6,11 +6,14 @@
 
 # DO NOT EDIT ANYTHING UNLESS YOU KNOW WHAT YOU ARE DOING.
 
-source helpers/output.sh
-source helpers/apt-get.sh
-source helpers/filesystem.sh
+# Determine the base path of this script.
+# echo "The script you are running has basename `basename "$0"`, dirname `dirname "$0"`"
+# echo "The present working directory is `pwd`"
+SCRIPTPATH=$(dirname "$0")
 
-SCRIPTPATH=$(pwd)
+source $SCRIPTPATH'/helpers/output.sh'
+source $SCRIPTPATH'/helpers/apt-get.sh'
+source $SCRIPTPATH'/helpers/filesystem.sh'
 
 sudo chmod -R 775 * >/dev/null 2>&1
 
@@ -21,7 +24,7 @@ function pause(){
 if [ "$EUID" -ne 0 ]
   then
   echo
-  echo -e $RED'Please run as root using the command: '$ENDCOLOR'sudo ./setup.sh'
+  echo -e $RED'Please run as root using the command: '$ENDCOLOR'sudo /opt/vps-toolkit/setup.sh'
   echo
   exit 0
 fi
@@ -73,80 +76,80 @@ show_main_menu() {
             echo
             pause 'Press [Enter] to restart and continue...'
             cd $SCRIPTPATH
-            sudo bash ./setup.sh
+            sudo bash $SCRIPTPATH'/setup.sh'
             exit 0
             ;;
         2 | 02)
-            source ./utilities/base-tools-installer.sh
+            source $SCRIPTPATH'/utilities/base-tools-installer.sh'
             ;;
         3| 03)
-            source ./users/create-user.sh
+            source $SCRIPTPATH'/users/create-user.sh'
             ;;
         4| 04)
-            sudo ./users/create-mysql-user.sh
+            sudo $SCRIPTPATH'/users/create-mysql-user.sh'
             ;;
         10)
-            source ./webservers/nginx-installer.sh
+            source $SCRIPTPATH'/webservers/nginx-installer.sh'
             ;;
         11)
-            sudo ./webservers/nginx-uninstaller.sh
+            sudo $SCRIPTPATH'/webservers/nginx-uninstaller.sh'
             ;;
         12)
-            source ./webservers/certbot-installer.sh
+            source $SCRIPTPATH'/webservers/certbot-installer.sh'
             ;;
         20)
-            sudo ./databases/pgsql-installer.sh
+            sudo $SCRIPTPATH'/databases/pgsql-installer.sh'
             ;;
         21)
-            sudo ./databases/pgsql-uninstaller.sh
+            sudo $SCRIPTPATH'/databases/pgsql-uninstaller.sh'
             ;;
         22)
-            sudo ./databases/mysql-installer.sh
+            sudo $SCRIPTPATH'/databases/mysql-installer.sh'
             ;;
         23)
-            sudo ./databases/mysql-uninstaller.sh
+            sudo $SCRIPTPATH'/databases/mysql-uninstaller.sh'
             ;;
         24)
-            source ./databases/mariadb-installer.sh
+            source $SCRIPTPATH'/databases/mariadb-installer.sh'
             ;;
         25)
-            sudo ./databases/mariadb-uninstaller.sh
+            sudo $SCRIPTPATH'/databases/mariadb-uninstaller.sh'
             ;;
         28)
-            source ./databases/automysqlbackup-installer.sh
+            source $SCRIPTPATH'/databases/automysqlbackup-installer.sh'
             ;;
         30)
-            source ./php/php-installer.sh
+            source $SCRIPTPATH'/php/php-installer.sh'
             ;;
         31)
-            sudo ./php/php-uninstaller.sh
+            sudo $SCRIPTPATH'/php/php-uninstaller.sh'
             ;;
         34)
-            source ./php/composer-installer.sh
+            source $SCRIPTPATH'/php/composer-installer.sh'
             ;;
         35)
-            sudo ./php/composer-uninstaller.sh
+            sudo $SCRIPTPATH'/php/composer-uninstaller.sh'
             ;;
         36)
-            source ./node/node-installer.sh
+            source $SCRIPTPATH'/node/node-installer.sh'
             ;;
         37)
-            sudo ./node/node-uninstaller.sh
+            sudo $SCRIPTPATH'/node/node-uninstaller.sh'
             ;;
         60)
-            source ./utilities/transmission-webui-installer.sh
+            source $SCRIPTPATH'/utilities/transmission-webui-installer.sh'
             ;;
         61)
-            sudo ./utilities/transmission-webui-uninstaller.sh
+            sudo $SCRIPTPATH'/utilities/transmission-webui-uninstaller.sh'
             ;;
         62)
-            sudo ./apps/invoice-ninja-installer.sh
+            sudo $SCRIPTPATH'/apps/invoice-ninja-installer.sh'
             ;;
         63)
-            sudo ./apps/invoice-ninja-updater.sh
+            sudo $SCRIPTPATH'/apps/invoice-ninja-updater.sh'
             ;;
         98)
-            source ./test.sh
+            source $SCRIPTPATH'/test.sh'
             ;;
         99)
             echo 'Exiting...'
