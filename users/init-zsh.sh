@@ -22,7 +22,7 @@ if [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
 fi
 
 # Install custom Prezto theme
-git clone --recursive https://github.com/lykegenes/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+git clone --recursive https://github.com/patricksamson/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
 # Create symlinks
 setopt EXTENDED_GLOB
